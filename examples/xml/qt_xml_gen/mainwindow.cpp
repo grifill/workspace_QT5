@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+extern void DictF();
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    DictF();
     ui->setupUi(this);
 }
 
@@ -30,13 +32,19 @@ void MainWindow::on_generateButton_clicked() {
     QXmlStreamWriter xmlWriter(&file);
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
-    xmlWriter.writeStartElement("description");
 
-    xmlWriter.writeStartElement("Company");  // Записываем тег с именем для первого чекбокса
-    xmlWriter.writeCharacters("AFKS");
-    xmlWriter.writeEndElement();             // Закрываем тег
+    xmlWriter.writeStartElement("MyBalance"); // Start 1
+    xmlWriter.writeStartElement("Earnings");   // Start 2
+    xmlWriter.writeStartElement("NetSpend");  // Start 3
+    xmlWriter.writeStartElement("Zarpalata");  // Start 4
+
+    xmlWriter.writeCharacters("10.04.2025 - 250000 Rub");   // CH
 
     xmlWriter.writeEndElement();
+    xmlWriter.writeEndElement();
+    xmlWriter.writeEndElement();
+    xmlWriter.writeEndElement();
+
     xmlWriter.writeEndDocument();
     file.close();   // Закрываем файл
 }
