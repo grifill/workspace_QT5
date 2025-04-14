@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "MyDict/dict_IIS.h"
+
 extern void DictF();
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

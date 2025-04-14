@@ -3,6 +3,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++20
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -10,15 +11,15 @@ CONFIG += c++20
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    dict_IIS.cpp \
+    MyClasses/myClassesData.cpp \
+    MyDict/dict_IIS.cpp \
     main.cpp \
-    mainwindow.cpp \
-    myClassesData.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    lkoh.h \
-    mainwindow.h \
-    myClassesData.h
+    MyClasses/myClassesData.h \
+    MyDict/dict_IIS.h \
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui

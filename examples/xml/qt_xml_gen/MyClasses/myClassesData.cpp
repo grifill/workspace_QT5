@@ -1,3 +1,24 @@
+/**
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025 Gregory Filatov
+ * All rights reserved.
+ *
+ * \file   myClassesData.cpp
+ *
+ * \author Gregory Filatov
+ * \date   09 April 2025
+ * \version 1.0
+ *
+ * \brief  Contains my Data classes
+ *
+ * Module: myClassesData.cpp
+ *
+ * Purpose: Lib-file
+ *
+ * Functionality:
+ *     Environment
+ * ---------------------------------------------------------------------------
+ */
 #include "myClassesData.h"
 
 Date::Date():

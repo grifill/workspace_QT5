@@ -13,7 +13,7 @@
  *
  * Module: myClassesData.h
  *
- * Purpose: Example file
+ * Purpose: Lib-file
  *
  * Functionality:
  *     Environment
