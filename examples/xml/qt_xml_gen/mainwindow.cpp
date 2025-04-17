@@ -3,12 +3,10 @@
 
 #include "MyDict/dict_IIS.h"
 
-extern void DictF();
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    DictF();
     ui->setupUi(this);
 }
 
@@ -18,6 +16,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_generateButton_clicked() {
+
     // Вызываем диалог выбора файла для сохранения
     QString filename = QFileDialog::getSaveFileName(this,
                                            tr("Save Xml"), ".",
@@ -49,5 +48,53 @@ void MainWindow::on_generateButton_clicked() {
 
     xmlWriter.writeEndDocument();
     file.close();   // Закрываем файл
+}
+
+
+extern void FuncFF();
+#include "MyClasses/myClassesData.h"
+#include "MyDict/dict_IIS.h"
+
+void MainWindow::on_pushButton_clicked() {
+
+    FuncFF();
+
+    QChart *chart = new QChart;
+    chart->setAnimationOptions(QChart::AllAnimations);
+    QBarSeries *series = new QBarSeries;
+    QVBarModelMapper *mapper = new QVBarModelMapper(this);
+    mapper->setFirstBarSetColumn(2);
+    mapper->setLastBarSetColumn(4);
+    mapper->setFirstRow(3);
+    mapper->setRowCount(5);
+    mapper->setSeries(series);
+    chart->addSeries(series);
+
+    QStringList categories;
+    categories << "April" << "May" << "June" << "July" << "August";
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+    QValueAxis *axisY = new QValueAxis();
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setMinimumSize(640, 480);
+    //! [7]
+
+    //! [8]
+    // create main layout
+    QWidget *placeholderWidget = new QWidget;
+    QGridLayout *sainLayout = new QGridLayout;
+    sainLayout->addWidget(chartView, 1, 1);
+    sainLayout->setColumnStretch(1, 1);
+    sainLayout->setColumnStretch(0, 0);
+    //setLayout(sainLayout);
+    placeholderWidget->setLayout(sainLayout);
+    setCentralWidget(placeholderWidget);
+
 }
 

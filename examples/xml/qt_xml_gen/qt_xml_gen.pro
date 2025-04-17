@@ -1,6 +1,7 @@
-QT       += core gui
+# Copyright (c) 2025 Gregory Filatov
+QT += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets charts
 
 CONFIG += c++20
 QMAKE_CXXFLAGS += -Wno-deprecated-copy

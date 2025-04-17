@@ -8,6 +8,10 @@
 #include <QXmlStreamAttribute>
 #include <QMessageBox>
 #include <QFile>
+#include <QtCharts>
+#include <QWidget>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +27,8 @@ public:
 
 private slots:
     void on_generateButton_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -21,28 +21,38 @@
  */
 #include <stdint.h>
 #include <iostream>
-#include <map>
+#include <list>
 #include <string>
+#include <utility>
+#include <map>
 
 #include "MyClasses/myClassesData.h"
 #include "MyDict/dict_IIS.h"
 
-void DictF() {
-    std::map<Date, int, Comparator> myMap;
-    int month = START_MONTH;
-    int year = START_YEAR;
-
-    for(int i = 0; i < MONTH_CNT; ++i) {
-        myMap.insert({Date(DEFAULT_DAY, month, year), vlMass[i]});
-        month++;
-        if(!(month % 13)) {
-            year++;
-            month = 1;
+auto autoDictFill(std::list<std::pair<Date, int>>& mapFill, int monthStart, int yearStart, int monthCnt, int* massData) {
+    for(int i = 0; i < monthCnt; ++i) {
+        mapFill.emplace(mapFill.end(), Date(DEFAULT_DAY, monthStart, yearStart), massData[i]);
+        monthStart++;
+        if(!(monthStart % 13)) {
+            yearStart++;
+            monthStart = 1;
         }
     }
+     return mapFill;
+}
 
-    std::map<Date, int>::iterator it;
-    for (it = myMap.begin(); it != myMap.end(); ++it)
-        std::cout << it->first << " " << it->second << '\n';
+void FuncFF() {
+    std::list<std::pair<Date, int>> mapVL;
+    std::list<std::pair<Date, int>> mapCUR;
+
+    mapVL=autoDictFill(mapVL, START_MONTH, START_YEAR, MONTH_CNT, (int*)vlMass);
+    mapCUR=autoDictFill(mapCUR, START_MONTH, START_YEAR, MONTH_CNT, (int*)curMass);
+
+    for (const auto& elem : mapVL) {
+        std::cout << elem.first << ": " << elem.second << "\n";
+    }
+    for (const auto& elem : mapCUR) {
+        std::cout << elem.first << ": " << elem.second << "\n";
+    }
 }
 
