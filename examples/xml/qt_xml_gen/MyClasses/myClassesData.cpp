@@ -28,8 +28,8 @@ Date::Date():
                         "Arguments must be in the range of date");
 }
 
-Date::Date(int r, int g, int b):
-    mDay(r), mMonth(g), mYear(b){
+Date::Date(int d, int m, int y):
+    mDay(d), mMonth(m), mYear(y){
     if(!areValid())
         throw std::invalid_argument(
                         "Arguments must be in the range of date");
@@ -43,8 +43,17 @@ bool Date::areValid() const {
         return true;
 }
 
+std::string Date::toString() const {
+    return std::to_string(mMonth) + "." + std::to_string(mYear);
+}
+
+int Date::forComparator() const {
+    return mYear*2000 + mMonth*100 + mDay;
+}
+
 std::ostream& operator<<(std::ostream &output, const Date &c)
 {
     output << "(" << c.day() << ", " << c.month() << ", " << c.year() << ")";
     return output;
 }
+

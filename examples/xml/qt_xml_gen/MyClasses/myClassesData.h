@@ -34,6 +34,8 @@ public:
     int month() const {return mMonth;}
     int year() const {return mYear;}
     bool areValid() const;
+    std::string toString() const;
+    int forComparator() const;
 private:
     int mDay;
     int mMonth;
@@ -45,8 +47,7 @@ std::ostream& operator<<(std::ostream &output, const Date &c);
 class Comparator {
 public:
     bool operator()(const Date& c1, const Date& c2) const {
-        return c1.day() + c1.month() + c1.year() <
-            c2.day() + c2.month() + c2.year();
+        return c1.forComparator() < c2.forComparator();
     }
 };
 

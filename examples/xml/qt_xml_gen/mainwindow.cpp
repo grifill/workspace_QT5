@@ -54,47 +54,97 @@ void MainWindow::on_generateButton_clicked() {
 extern void FuncFF();
 #include "MyClasses/myClassesData.h"
 #include "MyDict/dict_IIS.h"
+#include <stdint.h>
+#include <iostream>
+#include <list>
+#include <string>
+#include <stdio.h>
+#include <utility>
+#include <map>
+
+#include "MyClasses/myClassesData.h"
+#include "MyDict/dict_IIS.h"
+
+#include <QString>
+#include <QList>
+#include <QBarSet>
+#include <QStandardItemModel>
+
+#include <cstdio>
+#include <format>
+#include <initializer_list>
+#include <iostream>
+#include <string>
+
+auto autoDictFill(std::list<std::pair<Date, int>>& mapFill, int monthStart, int yearStart, int monthCnt, int* massData) {
+    for(int i = 0; i < monthCnt; ++i) {
+        mapFill.emplace(mapFill.end(), Date(DEFAULT_DAY, monthStart, yearStart), massData[i]);
+        monthStart++;
+        if(!(monthStart % 13)) {
+            yearStart++;
+            monthStart = 1;
+        }
+    }
+     return mapFill;
+}
 
 void MainWindow::on_pushButton_clicked() {
 
-    FuncFF();
+    std::list<std::pair<Date, int>> mapVL;
+    QStringList dates;
+    mapVL=autoDictFill(mapVL, START_MONTH, START_YEAR, 32, (int*)vlMass);
+
+    QBarSeries *series = new QBarSeries;
 
     QChart *chart = new QChart;
     chart->setAnimationOptions(QChart::AllAnimations);
-    QBarSeries *series = new QBarSeries;
-    QVBarModelMapper *mapper = new QVBarModelMapper(this);
-    mapper->setFirstBarSetColumn(2);
-    mapper->setLastBarSetColumn(4);
-    mapper->setFirstRow(3);
-    mapper->setRowCount(5);
-    mapper->setSeries(series);
+
+    QBarSet *param = new QBarSet("My Map VL");
+
+    for(auto it = mapVL.begin(); it != mapVL.end(); ++it) {
+          dates << it->first.toString().c_str();
+          //QBarSet *param = new QBarSet(it->first.toString().c_str());
+          *param << it->second;
+          series->append(param);
+          std::cout << it->first << ": " << it->second << "\n";
+    }
+
+    //int first = 3;
+    //int count = 5;
+    //QVBarModelMapper *mapper = new QVBarModelMapper(this);
+    //mapper->setFirstBarSetColumn(1);
+    //mapper->setLastBarSetColumn(4);
+    //mapper->setFirstRow(first);
+    //mapper->setRowCount(count);
+    //mapper->setSeries(series);
+    //mapper->setModel(m_model);
+    //chart->addSeries(series);
+
     chart->addSeries(series);
 
-    QStringList categories;
-    categories << "April" << "May" << "June" << "July" << "August";
+    // Axis X -----------------------------------------
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(categories);
+    axisX->append(dates);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
+
+    // Axis Y -----------------------------------------
     QValueAxis *axisY = new QValueAxis();
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
+    // QChartView Window ------------------------------
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setMinimumSize(640, 480);
-    //! [7]
 
-    //! [8]
-    // create main layout
+    // Create main layout -----------------------------
     QWidget *placeholderWidget = new QWidget;
     QGridLayout *sainLayout = new QGridLayout;
     sainLayout->addWidget(chartView, 1, 1);
     sainLayout->setColumnStretch(1, 1);
     sainLayout->setColumnStretch(0, 0);
-    //setLayout(sainLayout);
     placeholderWidget->setLayout(sainLayout);
     setCentralWidget(placeholderWidget);
-
 }
 
