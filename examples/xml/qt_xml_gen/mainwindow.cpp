@@ -71,7 +71,6 @@ extern void FuncFF();
 #include <QStandardItemModel>
 
 #include <cstdio>
-#include <format>
 #include <initializer_list>
 #include <iostream>
 #include <string>
@@ -91,34 +90,32 @@ auto autoDictFill(std::list<std::pair<Date, int>>& mapFill, int monthStart, int 
 void MainWindow::on_pushButton_clicked() {
 
     std::list<std::pair<Date, int>> mapVL;
+    std::list<std::pair<Date, int>> mapCUR;
+
     QStringList dates;
-    mapVL=autoDictFill(mapVL, START_MONTH, START_YEAR, 32, (int*)vlMass);
+    mapVL=autoDictFill(mapVL, START_MONTH, START_YEAR, MONTH_CNT, (int*)vlMass);
+    mapCUR=autoDictFill(mapCUR, START_MONTH, START_YEAR, MONTH_CNT, (int*)curMass);
 
     QBarSeries *series = new QBarSeries;
 
     QChart *chart = new QChart;
     chart->setAnimationOptions(QChart::AllAnimations);
 
-    QBarSet *param = new QBarSet("My Map VL");
+    QBarSet *paramVL = new QBarSet("My Map VL");
+    //QBarSet *paramCUR = new QBarSet("My Map CUR");
 
     for(auto it = mapVL.begin(); it != mapVL.end(); ++it) {
           dates << it->first.toString().c_str();
-          //QBarSet *param = new QBarSet(it->first.toString().c_str());
-          *param << it->second;
-          series->append(param);
-          std::cout << it->first << ": " << it->second << "\n";
+          *paramVL << it->second;
+          series->append(paramVL);
+          //std::cout << it->first << ": " << it->second << "\n";
     }
 
-    //int first = 3;
-    //int count = 5;
-    //QVBarModelMapper *mapper = new QVBarModelMapper(this);
-    //mapper->setFirstBarSetColumn(1);
-    //mapper->setLastBarSetColumn(4);
-    //mapper->setFirstRow(first);
-    //mapper->setRowCount(count);
-    //mapper->setSeries(series);
-    //mapper->setModel(m_model);
-    //chart->addSeries(series);
+    /*for(auto it = mapCUR.begin(); it != mapCUR.end(); ++it) {
+          dates << it->first.toString().c_str();
+          *paramCUR << it->second;
+          series->append(paramCUR);
+    }*/
 
     chart->addSeries(series);
 

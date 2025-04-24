@@ -35,7 +35,6 @@
 #include <QStandardItemModel>
 
 #include <cstdio>
-#include <format>
 #include <initializer_list>
 #include <iostream>
 #include <string>
