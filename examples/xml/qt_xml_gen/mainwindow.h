@@ -11,7 +11,7 @@
 #include <QtCharts>
 #include <QWidget>
 
-
+#define IGNORE_MEMORY_LEAK_WARNING(x) no_memory_leak_ptr = x
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void *no_memory_leak_ptr;
 
 private slots:
     void on_generateButton_clicked();

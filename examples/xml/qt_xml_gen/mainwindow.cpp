@@ -102,20 +102,24 @@ void MainWindow::on_pushButton_clicked() {
     chart->setAnimationOptions(QChart::AllAnimations);
 
     QBarSet *paramVL = new QBarSet("My Map VL");
-    //QBarSet *paramCUR = new QBarSet("My Map CUR");
+    QBarSet *paramCUR = new QBarSet("My Map CUR");
 
-    for(auto it = mapVL.begin(); it != mapVL.end(); ++it) {
-          dates << it->first.toString().c_str();
-          *paramVL << it->second;
-          series->append(paramVL);
-          //std::cout << it->first << ": " << it->second << "\n";
-    }
+    IGNORE_MEMORY_LEAK_WARNING(paramVL);
+    IGNORE_MEMORY_LEAK_WARNING(paramCUR);
 
-    /*for(auto it = mapCUR.begin(); it != mapCUR.end(); ++it) {
-          dates << it->first.toString().c_str();
-          *paramCUR << it->second;
-          series->append(paramCUR);
-    }*/
+    for(auto itVL=mapVL.begin(), itCUR=mapCUR.begin();
+        (itVL!=mapVL.end())&&(itCUR!=mapCUR.end());
+        ++itVL, ++itCUR) {
+
+        dates << itVL->first.toString().c_str();
+        *paramVL << itVL->second;
+        *paramCUR << itCUR->second;
+
+        series->append(paramVL);
+        series->append(paramCUR);
+
+        //std::cout << itCUR->first << ": " << itCUR->second << "\n";
+     }
 
     chart->addSeries(series);
 
@@ -144,4 +148,3 @@ void MainWindow::on_pushButton_clicked() {
     placeholderWidget->setLayout(sainLayout);
     setCentralWidget(placeholderWidget);
 }
-
