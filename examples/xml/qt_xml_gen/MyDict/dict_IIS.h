@@ -23,6 +23,14 @@
 #ifndef DICT_IIS_H
 #define DICT_IIS_H
 
+#include <stdint.h>
+#include <iostream>
+#include <list>
+#include <string>
+#include <utility>
+
+#include "MyClasses/myClassesData.h"
+
 //
 #define DEFAULT_DAY (10)
 #define START_MONTH (9)
@@ -41,6 +49,8 @@ const int curMass[MONTH_CNT] = {500000, 600000, 625000, 650000,
                                650000, 720000, 820000, 855000, 960000, 1015000, 1025000, 1185000, 1270000, 1480000, 1575000, 1505000,
                                1595000, 1800000, 2000000, 2200000, 2250000, 2215000, 2200000, 1950000, 1925000, 3015000, 3000000, 2850000,
                                3200000, 3325000, 3450000, 3100000};
+
+std::list<std::pair<Date, int>> autoDictFill(std::list<std::pair<Date, int>>& mapFill, int monthStart, int yearStart, int monthCnt, int* massData);
 
 #endif // DICT_IIS_H
 

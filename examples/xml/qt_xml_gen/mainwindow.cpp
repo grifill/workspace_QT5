@@ -1,6 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+#include <QString>
+#include <QList>
+#include <QBarSet>
+#include <QStandardItemModel>
+
+#include "MyClasses/myClassesData.h"
 #include "MyDict/dict_IIS.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -48,43 +55,6 @@ void MainWindow::on_generateButton_clicked() {
 
     xmlWriter.writeEndDocument();
     file.close();   // Закрываем файл
-}
-
-
-extern void FuncFF();
-#include "MyClasses/myClassesData.h"
-#include "MyDict/dict_IIS.h"
-#include <stdint.h>
-#include <iostream>
-#include <list>
-#include <string>
-#include <stdio.h>
-#include <utility>
-#include <map>
-
-#include "MyClasses/myClassesData.h"
-#include "MyDict/dict_IIS.h"
-
-#include <QString>
-#include <QList>
-#include <QBarSet>
-#include <QStandardItemModel>
-
-#include <cstdio>
-#include <initializer_list>
-#include <iostream>
-#include <string>
-
-auto autoDictFill(std::list<std::pair<Date, int>>& mapFill, int monthStart, int yearStart, int monthCnt, int* massData) {
-    for(int i = 0; i < monthCnt; ++i) {
-        mapFill.emplace(mapFill.end(), Date(DEFAULT_DAY, monthStart, yearStart), massData[i]);
-        monthStart++;
-        if(!(monthStart % 13)) {
-            yearStart++;
-            monthStart = 1;
-        }
-    }
-     return mapFill;
 }
 
 void MainWindow::on_pushButton_clicked() {
