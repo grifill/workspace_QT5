@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/companies_icos">
+        <file>companies/ico/BANE_512x512.png</file>
+    </qresource>
+</RCC>
