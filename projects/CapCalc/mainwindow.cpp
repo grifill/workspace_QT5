@@ -8,13 +8,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("QTableWidget Example");
 
-   /* QPixmap pixmap = QPixmap(":/companies_icos/companies/ico/BANE_512x512.png");
-    int w = ui->company_ico->width();
-    int h = ui->company_ico->height();
-    ui->company_ico->setPixmap(pixmap.scaled (w,h,Qt::KeepAspectRatio));
+    // =============================================
+    QString logo = ":/companies_icos/companies/ico/BANE_512x512.png";
+
+    QPixmap pixmap = QPixmap(logo);
+    //int w = ui->company_ico->width();
+    //int h = ui->company_ico->height();
+    ui->company_ico->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     //pixmap.scaled(10,10,Qt::IgnoreAspectRatio);
-    //ui->company_ico->QLabel::setPixmap(pixmap);*/
+    //ui->company_ico->QLabel::setPixmap(pixmap);
 
 
 }

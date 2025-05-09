@@ -33,7 +33,7 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">image: url(:/companies_icos/companies/ico/BANE_512x512.png);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string/>
@@ -81,7 +81,7 @@
      <x>0</x>
      <y>0</y>
      <width>879</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
