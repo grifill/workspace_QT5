@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -18,6 +19,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     //pixmap.scaled(10,10,Qt::IgnoreAspectRatio);
     //ui->company_ico->QLabel::setPixmap(pixmap);
+
+    // ==============================================
+    model = new CustomTable;
+    //QTableView *tableView = new QTableView;
+    //tableView->setModel(model);
+    //tableView->setMinimumWidth(300);
+    //tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //model->setParent(tableView);
+
+    ui->tableViewMain->setModel(model);
+
 
 
 }

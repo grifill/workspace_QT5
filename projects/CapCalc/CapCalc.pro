@@ -10,11 +10,13 @@ QMAKE_CXXFLAGS += -Wno-deprecated-copy
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    customtable.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     companies/BANE.h \
+    customtable.h \
     mainwindow.h
 
 FORMS += \
