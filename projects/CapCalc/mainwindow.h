@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QPixmap>
+#include <QGridLayout>
+#include <QTableView>
+#include <QHeaderView>
+
+
 #include "customtable.h"
 
 QT_BEGIN_NAMESPACE

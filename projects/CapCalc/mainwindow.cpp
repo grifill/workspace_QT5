@@ -7,31 +7,36 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("QTableWidget Example");
+    this->setWindowTitle("CapCalc");
 
     // =============================================
     QString logo = ":/companies_icos/companies/ico/BANE_512x512.png";
-
     QPixmap pixmap = QPixmap(logo);
-    //int w = ui->company_ico->width();
-    //int h = ui->company_ico->height();
-    ui->company_ico->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    // =============================================
 
-    //pixmap.scaled(10,10,Qt::IgnoreAspectRatio);
-    //ui->company_ico->QLabel::setPixmap(pixmap);
+    // Интерфейс
+    QLabel *ico = new QLabel(this);
+    ico->setAlignment(Qt::AlignmentFlag::AlignCenter);
+    ico->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // ==============================================
     model = new CustomTable;
-    //QTableView *tableView = new QTableView;
-    //tableView->setModel(model);
-    //tableView->setMinimumWidth(300);
-    //tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    //tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    //model->setParent(tableView);
+    QTableView *tableView = new QTableView;
+    tableView->setModel(model);
+    tableView->setMinimumWidth(300);
+    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    model->setParent(tableView);
 
-    ui->tableViewMain->setModel(model);
-
-
+    // Create main layout -----------------------------
+    QWidget *placeholderWidget = new QWidget;
+    QGridLayout *sainLayout = new QGridLayout;
+    sainLayout->addWidget(ico, 1, 0);
+    sainLayout->addWidget(tableView, 1, 1);
+    sainLayout->setColumnStretch(1, 1);
+    sainLayout->setColumnStretch(0, 0);
+    placeholderWidget->setLayout(sainLayout);
+    setCentralWidget(placeholderWidget);
 
 }
 

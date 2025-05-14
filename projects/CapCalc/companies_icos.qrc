@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/companies_icos">
         <file>companies/ico/BANE_512x512.png</file>
+        <file>companies/ico/LKOH_512x512.png</file>
+        <file>companies/ico/SBER_512x512.png</file>
+        <file>companies/ico/HEAD_512x512.png</file>
     </qresource>
 </RCC>
