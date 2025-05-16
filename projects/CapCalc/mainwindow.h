@@ -7,25 +7,48 @@
 #include <QGridLayout>
 #include <QTableView>
 #include <QHeaderView>
-
+#include <QList>
+#include <QWindow>
+#include <QScreen>
+#include <QMessageBox>
+#include <QMenu>
+#include <QMenuBar>
+#include <QGroupBox>
 
 #include "customtable.h"
+#include "company_preview_area.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+class QAction;
+class QActionGroup;
+class QLabel;
+class QMenu;
+class QRadioButton;
+class QButtonGroup;
+class QTableWidget;
 QT_END_NAMESPACE
+class IconPreviewArea;
+class IconSizeSpinBox;
 
+//! [0]
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    MainWindow();
+    void show();
 
     CustomTable *model;
+    CompanyPreviewArea *previewComArea;
 
+private slots:
+    //void screenChanged();
+    void about();
 private:
-    Ui::MainWindow *ui;
+    void createActions();
+     //QLabel *devicePixelRatioLabel;
+     //QLabel *screenNameLabel;
 };
+
 #endif // MAINWINDOW_H

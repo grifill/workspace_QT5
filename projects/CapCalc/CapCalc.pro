@@ -1,5 +1,6 @@
-QT       += core gui
+# CapCalc proj
 
+QT += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++20
@@ -10,17 +11,16 @@ QMAKE_CXXFLAGS += -Wno-deprecated-copy
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    company_preview_area.cpp \
     customtable.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     companies/BANE.h \
+    company_preview_area.h \
     customtable.h \
     mainwindow.h
-
-FORMS += \
-    mainwindow.ui
 
 RESOURCES += \
     companies_icos.qrc

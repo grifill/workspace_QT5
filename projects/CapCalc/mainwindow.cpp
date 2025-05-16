@@ -1,13 +1,21 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "company_preview_area.h"
 
+MainWindow::MainWindow() {
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    this->setWindowTitle("CapCalc");
+    // 1. -----
+    QWidget *centralWidget = new QWidget(this);
+    setCentralWidget(centralWidget);
+
+    // 2. -----
+    createActions();
+
+    // 3. -----
+    QGroupBox *previewGroupBox = new QGroupBox(tr("Company preview"));
+    previewComArea = new CompanyPreviewArea(previewGroupBox);
+    QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
+    previewLayout->addWidget(previewComArea);
+
 
     // =============================================
     QString logo = ":/companies_icos/companies/ico/BANE_512x512.png";
@@ -17,6 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Интерфейс
     QLabel *ico = new QLabel(this);
     ico->setAlignment(Qt::AlignmentFlag::AlignCenter);
+    ico->setStyleSheet("QLabel {"
+                                 "border-style: solid;"
+                                 "border-width: 1px;"
+                                 "border-color: black; "
+                                 "}");
+    //ico->setText("lskdf;lsdkf;lk");
     ico->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // ==============================================
@@ -30,18 +44,31 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Create main layout -----------------------------
     QWidget *placeholderWidget = new QWidget;
-    QGridLayout *sainLayout = new QGridLayout;
-    sainLayout->addWidget(ico, 1, 0);
-    sainLayout->addWidget(tableView, 1, 1);
-    sainLayout->setColumnStretch(1, 1);
-    sainLayout->setColumnStretch(0, 0);
-    placeholderWidget->setLayout(sainLayout);
+    QGridLayout *mainLayout = new QGridLayout(centralWidget);
+    mainLayout->addWidget(previewGroupBox, 1, 0);
+    mainLayout->addWidget(ico, 1, 1);
+    mainLayout->addWidget(tableView, 1, 2);
+    mainLayout->setColumnStretch(1, 1);
+    mainLayout->setColumnStretch(0, 0);
+    placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
-
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+void MainWindow::createActions() {
+    QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
+    QAction *exitAct = fileMenu->addAction(tr("&Quit"), this, &QWidget::close);
+    exitAct->setShortcuts(QKeySequence::Quit);
+
+    QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
+    helpMenu->addAction(tr("&About"), this, &MainWindow::about);
+}
+
+void MainWindow::show() {
+    QMainWindow::show();
+}
+
+void MainWindow::about() {
+    QMessageBox::about(this, tr("About CapCalc"),
+            tr("The <b>CapCalc</b> example"));
 }
 
