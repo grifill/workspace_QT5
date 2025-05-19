@@ -1,118 +1,73 @@
 #include <QtWidgets>
 #include "company_preview_area.h"
 
-CompanyPreviewArea::CompanyPreviewArea(QWidget *parent)
-    : QWidget(parent)
-{
+CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *data)
+    : QWidget(parent) {
+
     QGridLayout *mainLayout = new QGridLayout(this);
 
-    for (int row = 0; row < NumStates; ++row) {
-        stateLabels[row] = createHeaderLabel(CompanyPreviewArea::iconStateNames().at(row));
-        mainLayout->addWidget(stateLabels[row], row + 1, 0);
-    }
-    Q_ASSERT(NumStates == 2);
+    // Logo ----------------------------------------
+    QString logoCompany = data->logoPATH;
+    QPixmap pixmap = QPixmap(logoCompany);
+    QLabel *ico = new QLabel(this);
+    ico->setAlignment(Qt::AlignmentFlag::AlignHCenter);
+    ico->setPixmap(pixmap.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
-    for (int column = 0; column < NumModes; ++column) {
-        modeLabels[column] = createHeaderLabel(CompanyPreviewArea::iconModeNames().at(column));
-        mainLayout->addWidget(modeLabels[column], 0, column + 1);
-    }
-    Q_ASSERT(NumModes == 4);
+    // Name ----------------------------------------
+    QLabel *name = new QLabel(tr("<b>%1</b>").arg(data->nameCompany));
+    name->setAlignment(Qt::AlignmentFlag::AlignHCenter);
 
-    for (int column = 0; column < NumModes; ++column) {
-        for (int row = 0; row < NumStates; ++row) {
-            pixmapLabels[column][row] = createPixmapLabel();
-            mainLayout->addWidget(pixmapLabels[column][row], row + 1, column + 1);
+    /*QLabel *name = new QLabel(this);
+    name->setAlignment(Qt::AlignmentFlag::AlignHCenter);
+    name->setText(nameCompany);*/
+
+    // Table --------------------------------------
+    //QTextTable *table = nullptr;
+    //insertAlignedText(table, 1, 1, Qt::AlignCenter, "asd");
+    QTextEdit *tableInfoCompany = new QTextEdit;
+    QTextTableFormat tableFormat;
+
+    /*
+    tableInfoCompany->textCursor().insertTable(10, 2, tableFormat);
+    for (int row = 0; row < 2; ++row) {
+        for (int col = 0; col < 10; ++col) {
+            tableInfoCompany->textCursor().insertText("someQString");
+            tableInfoCompany->textCursor().movePosition(QTextCursor::NextCell);
         }
-    }
+    }*/
+
+    tableFormat.setAlignment(Qt::AlignCenter);
+    tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
+    tableFormat.setCellPadding(0);
+    tableFormat.setCellSpacing(0);
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    tableInfoCompany->textCursor().insertTable(10, 2, tableFormat);
+
+
+
+    mainLayout->addWidget(ico);
+    mainLayout->addWidget(name);
+    mainLayout->addWidget(tableInfoCompany);
 }
 
-
-QVector<QIcon::Mode> CompanyPreviewArea::iconModes()
+// Insert text with specified alignment in specified cell
+void CompanyPreviewArea::insertAlignedText(QTextTable *table, int row, int col, Qt::Alignment alignment, QString text)
 {
-    static const QVector<QIcon::Mode> result = {QIcon::Normal, QIcon::Active, QIcon::Disabled, QIcon::Selected};
-    return result;
-}
+    // Obtain cursor and current block format
+    QTextCursor textCursor = table->cellAt(row,col).firstCursorPosition();
+    QTextBlockFormat blockFormat = textCursor.blockFormat();
 
-QVector<QIcon::State> CompanyPreviewArea::iconStates()
-{
-    static const QVector<QIcon::State> result = {QIcon::Off, QIcon::On};
-    return result;
-}
+    // Read vertical part of current alignment flags
+    Qt::Alignment vertAlign = blockFormat.alignment() & Qt::AlignVertical_Mask;
 
-QStringList CompanyPreviewArea::iconModeNames()
-{
-    static const QStringList result = {tr("Normal"), tr("Active"), tr("Disabled"), tr("Selected")};
-    return result;
-}
+    // Mask out vertical part of specified alignment flags
+    Qt::Alignment horzAlign = alignment & Qt::AlignHorizontal_Mask;
 
-QStringList CompanyPreviewArea::iconStateNames()
-{
-    static const QStringList result = {tr("Off"), tr("On")};
-    return result;
-}
+    // Combine current vertical and specified horizontal alignment
+    Qt::Alignment combAlign = horzAlign | vertAlign;
 
-
-void CompanyPreviewArea::setIcon(const QIcon &icon)
-{
-    this->icon = icon;
-    updatePixmapLabels();
-}
-
-
-void CompanyPreviewArea::setSize(const QSize &size)
-{
-    if (size != this->size) {
-        this->size = size;
-        updatePixmapLabels();
-    }
-}
-
-
-QLabel *CompanyPreviewArea::createHeaderLabel(const QString &text)
-{
-    QLabel *label = new QLabel(tr("<b>%1</b>").arg(text));
-    label->setAlignment(Qt::AlignCenter);
-    return label;
-}
-
-
-QLabel *CompanyPreviewArea::createPixmapLabel()
-{
-    QLabel *label = new QLabel;
-    label->setEnabled(false);
-    label->setAlignment(Qt::AlignCenter);
-    label->setFrameShape(QFrame::Box);
-    label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    label->setBackgroundRole(QPalette::Base);
-    label->setAutoFillBackground(true);
-    label->setMinimumSize(132, 132);
-    return label;
-}
-
-
-void CompanyPreviewArea::updatePixmapLabels()
-{
-    QWindow *window = nullptr;
-    if (const QWidget *nativeParent = nativeParentWidget())
-        window = nativeParent->windowHandle();
-    for (int column = 0; column < NumModes; ++column) {
-        for (int row = 0; row < NumStates; ++row) {
-            const QPixmap pixmap =
-                icon.pixmap(window, size, CompanyPreviewArea::iconModes().at(column),
-                            CompanyPreviewArea::iconStates().at(row));
-            QLabel *pixmapLabel = pixmapLabels[column][row];
-            pixmapLabel->setPixmap(pixmap);
-            pixmapLabel->setEnabled(!pixmap.isNull());
-            QString toolTip;
-            if (!pixmap.isNull()) {
-                const QSize actualSize = icon.actualSize(size);
-                toolTip =
-                    tr("Size: %1x%2\nActual size: %3x%4\nDevice pixel ratio: %5")
-                        .arg(size.width()).arg(size.height())
-                        .arg(actualSize.width()).arg(actualSize.height())
-                        .arg(pixmap.devicePixelRatioF());
-            }
-            pixmapLabel->setToolTip(toolTip);
-        }
-    }
+    // Apply and write
+    blockFormat.setAlignment(combAlign);
+    textCursor.setBlockFormat(blockFormat);
+    textCursor.insertText(text);
 }

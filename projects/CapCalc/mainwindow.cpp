@@ -11,27 +11,15 @@ MainWindow::MainWindow() {
     createActions();
 
     // 3. -----
+    CompanyPreviewAreaInfo data;
+    data.nameCompany = "PJSC ANC Bashneft";
+    data.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
+
+    // 4. -----
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company preview"));
-    previewComArea = new CompanyPreviewArea(previewGroupBox);
+    previewComArea = new CompanyPreviewArea(previewGroupBox, &data);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
     previewLayout->addWidget(previewComArea);
-
-
-    // =============================================
-    QString logo = ":/companies_icos/companies/ico/BANE_512x512.png";
-    QPixmap pixmap = QPixmap(logo);
-    // =============================================
-
-    // Интерфейс
-    QLabel *ico = new QLabel(this);
-    ico->setAlignment(Qt::AlignmentFlag::AlignCenter);
-    ico->setStyleSheet("QLabel {"
-                                 "border-style: solid;"
-                                 "border-width: 1px;"
-                                 "border-color: black; "
-                                 "}");
-    //ico->setText("lskdf;lsdkf;lk");
-    ico->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // ==============================================
     model = new CustomTable;
@@ -46,8 +34,8 @@ MainWindow::MainWindow() {
     QWidget *placeholderWidget = new QWidget;
     QGridLayout *mainLayout = new QGridLayout(centralWidget);
     mainLayout->addWidget(previewGroupBox, 1, 0);
-    mainLayout->addWidget(ico, 1, 1);
-    mainLayout->addWidget(tableView, 1, 2);
+    //mainLayout->addWidget(ico, 1, 1);
+    mainLayout->addWidget(tableView, 1, 1);
     mainLayout->setColumnStretch(1, 1);
     mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
