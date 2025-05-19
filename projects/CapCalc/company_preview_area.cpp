@@ -6,14 +6,14 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
 
     QGridLayout *mainLayout = new QGridLayout(this);
 
-    // Logo ----------------------------------------
+    // Logo ==============================================================================
     QString logoCompany = data->logoPATH;
     QPixmap pixmap = QPixmap(logoCompany);
     QLabel *ico = new QLabel(this);
     ico->setAlignment(Qt::AlignmentFlag::AlignHCenter);
     ico->setPixmap(pixmap.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
-    // Name ----------------------------------------
+    // Name ==============================================================================
     QLabel *name = new QLabel(tr("<b>%1</b>").arg(data->nameCompany));
     name->setAlignment(Qt::AlignmentFlag::AlignHCenter);
 
@@ -21,29 +21,32 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
     name->setAlignment(Qt::AlignmentFlag::AlignHCenter);
     name->setText(nameCompany);*/
 
-    // Table --------------------------------------
-    //QTextTable *table = nullptr;
-    //insertAlignedText(table, 1, 1, Qt::AlignCenter, "asd");
+    // Table =============================================================================
+    int row = 10;
+    int col = 2;
     QTextEdit *tableInfoCompany = new QTextEdit;
-    QTextTableFormat tableFormat;
-
-    /*
-    tableInfoCompany->textCursor().insertTable(10, 2, tableFormat);
-    for (int row = 0; row < 2; ++row) {
-        for (int col = 0; col < 10; ++col) {
-            tableInfoCompany->textCursor().insertText("someQString");
-            tableInfoCompany->textCursor().movePosition(QTextCursor::NextCell);
-        }
-    }*/
-
+    tableInfoCompany->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    QTextCursor cursor(tableInfoCompany->textCursor());
+    QTextTable *table = cursor.insertTable(row, col);
+    QTextTableFormat tableFormat = table->format();
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     tableFormat.setAlignment(Qt::AlignCenter);
     tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
+    tableFormat.setBorderBrush(Qt::black);
     tableFormat.setCellPadding(0);
     tableFormat.setCellSpacing(0);
-    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-    tableInfoCompany->textCursor().insertTable(10, 2, tableFormat);
 
+    //Set the columnWidthConstraints constraints of the table
+    /*QVector<QTextLength> colLength = tableFormat.columnWidthConstraints();
+    for (int i = 0; i < col; ++i) {
+        colLength.append(QTextLength(QTextLength::FixedLength,tableFormat.width().rawValue()/col));
+    }
+    tableFormat.setColumnWidthConstraints(colLength);*/
 
+    insertAlignedText(table, 0, 0, Qt::AlignCenter, "aaa");
+    insertAlignedText(table, 0, 1, Qt::AlignCenter, "bbb");
+
+    table->setFormat(tableFormat);
 
     mainLayout->addWidget(ico);
     mainLayout->addWidget(name);
