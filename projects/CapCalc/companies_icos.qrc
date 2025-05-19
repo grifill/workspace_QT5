@@ -4,5 +4,21 @@
         <file>companies/ico/LKOH_512x512.png</file>
         <file>companies/ico/SBER_512x512.png</file>
         <file>companies/ico/HEAD_512x512.png</file>
+        <file>companies/ico/BSPB_512x512.png</file>
+        <file>companies/ico/DATA_512x512.png</file>
+        <file>companies/ico/ENPG_512x512.png</file>
+        <file>companies/ico/GAZP_512x512.png</file>
+        <file>companies/ico/GCHE_512x512.png</file>
+        <file>companies/ico/MDMG_512x512.png</file>
+        <file>companies/ico/MGNT_512x512.png</file>
+        <file>companies/ico/MOEX_512x512.png</file>
+        <file>companies/ico/NMTP_512x512.png</file>
+        <file>companies/ico/NVTK_512x512.png</file>
+        <file>companies/ico/PLZL_512x512.png</file>
+        <file>companies/ico/ROSN_512x512.png</file>
+        <file>companies/ico/SBER2_512x512.png</file>
+        <file>companies/ico/SIBN_512x512.png</file>
+        <file>companies/ico/TATN_512x512.png</file>
+        <file>companies/ico/VTBR_512x512.png</file>
     </qresource>
 </RCC>
