@@ -11,14 +11,29 @@ MainWindow::MainWindow() {
     createActions();
 
     // 3. -----
+    // Choise ============================================================================
+    QComboBox* choiseCompany = new QComboBox;
+    QLabel* choiseCompanyName = new QLabel;
+    QFrame* choiseCompanyFrame = new QFrame;
+    choiseCompanyFrame->setFrameShape(QFrame::Box);
+    choiseCompanyFrame->setMinimumSize(200,20);
+    choiseCompanyName->setText("Company Choise");
+    choiseCompany->addItem("BANE");
+    choiseCompany->addItem("LKOH");
+
+    connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
+
+
+    // 4. -----
     CompanyPreviewAreaInfo data;
     data.nameCompany = "PJSC ANC Bashneft";
     data.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
 
-    // 4. -----
-    QGroupBox *previewGroupBox = new QGroupBox(tr("Company preview"));
+    // 5. -----
+    QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
     previewComArea = new CompanyPreviewArea(previewGroupBox, &data);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
+    previewGroupBox->setMinimumSize(300,600);
     previewLayout->addWidget(previewComArea);
 
     // ==============================================
@@ -33,10 +48,15 @@ MainWindow::MainWindow() {
     // Create main layout -----------------------------
     QWidget *placeholderWidget = new QWidget;
     QGridLayout *mainLayout = new QGridLayout(centralWidget);
-    mainLayout->addWidget(previewGroupBox, 1, 0);
-    //mainLayout->addWidget(ico, 1, 1);
+    QGridLayout *choiseLayout = new QGridLayout();
+
+    choiseLayout->addWidget(choiseCompanyFrame);
+    choiseLayout->addWidget(choiseCompanyName, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    choiseLayout->addWidget(choiseCompany, 0, 0, Qt::AlignRight | Qt::AlignVCenter);
+
+    mainLayout->addLayout(choiseLayout, 0, 0, Qt::AlignLeft | Qt::AlignTop);
+    mainLayout->addWidget(previewGroupBox, 1, 0, Qt::AlignHCenter | Qt::AlignTop);
     mainLayout->addWidget(tableView, 1, 1);
-    mainLayout->setColumnStretch(1, 1);
     mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
@@ -60,3 +80,8 @@ void MainWindow::about() {
             tr("The <b>CapCalc</b> example"));
 }
 
+void MainWindow::reprint(const QString &company) {
+    if (company == "LKOH") {
+        qDebug("LKOH");
+    }
+}

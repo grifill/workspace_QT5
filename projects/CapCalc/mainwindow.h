@@ -14,6 +14,8 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QGroupBox>
+#include <QComboBox>
+#include <QFrame>
 
 #include "customtable.h"
 #include "company_preview_area.h"
@@ -45,6 +47,7 @@ public:
 private slots:
     //void screenChanged();
     void about();
+    void reprint(const QString &company);
 private:
     void createActions();
      //QLabel *devicePixelRatioLabel;
