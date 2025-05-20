@@ -16,6 +16,7 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QFrame>
+#include <QLineEdit>
 
 #include "customtable.h"
 #include "company_preview_area.h"

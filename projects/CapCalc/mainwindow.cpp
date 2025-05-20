@@ -3,33 +3,39 @@
 
 MainWindow::MainWindow() {
 
-    // 1. -----
+    // 1. =========================================================
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
-    // 2. -----
+    // 2. =========================================================
     createActions();
 
-    // 3. -----
-    // Choise ============================================================================
+    // 3. Choise ==================================================
+    QGridLayout *choiseLayout = new QGridLayout();
     QComboBox* choiseCompany = new QComboBox;
     QLabel* choiseCompanyName = new QLabel;
-    QFrame* choiseCompanyFrame = new QFrame;
-    choiseCompanyFrame->setFrameShape(QFrame::Box);
-    choiseCompanyFrame->setMinimumSize(200,20);
     choiseCompanyName->setText("Company Choise");
-    choiseCompany->addItem("BANE");
-    choiseCompany->addItem("LKOH");
+    choiseCompany->setMinimumSize(200,25);
+    choiseCompany->setEditable(true);
+    choiseCompany->lineEdit()->setReadOnly(true);
+    choiseCompany->lineEdit()->setAlignment(Qt::AlignCenter);
 
+    // Add Item Block
+    choiseCompany->addItem("ПАО АНК «Башнефть»");
+    choiseCompany->addItem("ПАО «НК Роснефть»");
+
+    // Signals & slots
     connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
 
+    // Add
+    choiseLayout->addWidget(choiseCompanyName);
+    choiseLayout->addWidget(choiseCompany);
 
-    // 4. -----
+    // 4. Preview =================================================
     CompanyPreviewAreaInfo data;
     data.nameCompany = "PJSC ANC Bashneft";
     data.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
 
-    // 5. -----
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
     previewComArea = new CompanyPreviewArea(previewGroupBox, &data);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
@@ -45,18 +51,15 @@ MainWindow::MainWindow() {
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     model->setParent(tableView);
 
-    // Create main layout -----------------------------
+    // 4. Create Main Layout =======================================
     QWidget *placeholderWidget = new QWidget;
     QGridLayout *mainLayout = new QGridLayout(centralWidget);
-    QGridLayout *choiseLayout = new QGridLayout();
-
-    choiseLayout->addWidget(choiseCompanyFrame);
-    choiseLayout->addWidget(choiseCompanyName, 0, 0, Qt::AlignLeft | Qt::AlignVCenter);
-    choiseLayout->addWidget(choiseCompany, 0, 0, Qt::AlignRight | Qt::AlignVCenter);
 
     mainLayout->addLayout(choiseLayout, 0, 0, Qt::AlignLeft | Qt::AlignTop);
+
     mainLayout->addWidget(previewGroupBox, 1, 0, Qt::AlignHCenter | Qt::AlignTop);
     mainLayout->addWidget(tableView, 1, 1);
+
     mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
@@ -81,7 +84,7 @@ void MainWindow::about() {
 }
 
 void MainWindow::reprint(const QString &company) {
-    if (company == "LKOH") {
-        qDebug("LKOH");
+    if (company == "ПАО «НК Роснефть»") {
+        qDebug("ROSN");
     }
 }
