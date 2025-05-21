@@ -25,8 +25,11 @@ class CompanyPreviewArea : public QWidget
 
 public:
     explicit CompanyPreviewArea(QWidget *parent = nullptr, CompanyPreviewAreaInfo *data = nullptr);
+    void infoDataChange(CompanyPreviewAreaInfo *newData);
 private:
     void insertAlignedText(QTextTable *table, int row, int col, Qt::Alignment alignment, QString text);
+signals:
+    void companyPreviewAreaInfoDataChanged(CompanyPreviewAreaInfo *data);
 };
 
 #endif // COMPANY_PREVIEW_AREA_H

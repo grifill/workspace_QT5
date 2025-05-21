@@ -11,7 +11,7 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
     QPixmap pixmap = QPixmap(logoCompany);
     QLabel *ico = new QLabel(this);
     ico->setAlignment(Qt::AlignmentFlag::AlignHCenter);
-    ico->setPixmap(pixmap.scaled(200, 200, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ico->setPixmap(pixmap.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     // Name ==============================================================================
     QLabel *name = new QLabel(tr("<b>%1</b>").arg(data->nameCompany));
@@ -32,7 +32,7 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     tableFormat.setAlignment(Qt::AlignCenter);
     tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
-    tableFormat.setBorderBrush(Qt::black);
+    tableFormat.setBorderBrush(Qt::lightGray);
     tableFormat.setCellPadding(0);
     tableFormat.setCellSpacing(0);
 
@@ -73,4 +73,9 @@ void CompanyPreviewArea::insertAlignedText(QTextTable *table, int row, int col, 
     blockFormat.setAlignment(combAlign);
     textCursor.setBlockFormat(blockFormat);
     textCursor.insertText(text);
+}
+
+void CompanyPreviewArea::infoDataChange(CompanyPreviewAreaInfo *newData)
+{
+    emit companyPreviewAreaInfoDataChanged(newData);
 }

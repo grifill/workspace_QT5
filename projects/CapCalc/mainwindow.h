@@ -45,6 +45,8 @@ public:
     CustomTable *model;
     CompanyPreviewArea *previewComArea;
 
+
+    CompanyPreviewAreaInfo CompanyPreviewData;
 private slots:
     //void screenChanged();
     void about();

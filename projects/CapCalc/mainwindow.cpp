@@ -32,12 +32,11 @@ MainWindow::MainWindow() {
     choiseLayout->addWidget(choiseCompany);
 
     // 4. Preview =================================================
-    CompanyPreviewAreaInfo data;
-    data.nameCompany = "PJSC ANC Bashneft";
-    data.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
+    CompanyPreviewData.nameCompany = "ПАО АНК «Башнефть»";
+    CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
 
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
-    previewComArea = new CompanyPreviewArea(previewGroupBox, &data);
+    previewComArea = new CompanyPreviewArea(previewGroupBox, &CompanyPreviewData);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
     previewGroupBox->setMinimumSize(300,600);
     previewLayout->addWidget(previewComArea);
@@ -86,5 +85,7 @@ void MainWindow::about() {
 void MainWindow::reprint(const QString &company) {
     if (company == "ПАО «НК Роснефть»") {
         qDebug("ROSN");
+        CompanyPreviewData.nameCompany = "ПАО «НК Роснефть»";
+        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/ROSN_512x512.png";
     }
 }
