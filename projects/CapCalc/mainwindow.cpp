@@ -24,9 +24,6 @@ MainWindow::MainWindow() {
     choiseCompany->addItem("ПАО АНК «Башнефть»");
     choiseCompany->addItem("ПАО «НК Роснефть»");
 
-    // Signals & slots
-    connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
-
     // Add
     choiseLayout->addWidget(choiseCompanyName);
     choiseLayout->addWidget(choiseCompany);
@@ -50,7 +47,11 @@ MainWindow::MainWindow() {
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     model->setParent(tableView);
 
-    // 4. Create Main Layout =======================================
+    // 4. Signals & slots =======================================
+    connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
+    //connect(previewComArea, SIGNAL(reprint(const QString &)), SLOT(infoDataChange(const CompanyPreviewAreaInfo &)));
+
+    // 5. Create Main Layout =======================================
     QWidget *placeholderWidget = new QWidget;
     QGridLayout *mainLayout = new QGridLayout(centralWidget);
 
@@ -87,5 +88,15 @@ void MainWindow::reprint(const QString &company) {
         qDebug("ROSN");
         CompanyPreviewData.nameCompany = "ПАО «НК Роснефть»";
         CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/ROSN_512x512.png";
+        previewComArea->infoDataChange(&CompanyPreviewData);
     }
+    if (company == "ПАО АНК «Башнефть»") {
+        qDebug("BANE");
+        CompanyPreviewData.nameCompany = "ПАО АНК «Башнефть»";
+        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
+        previewComArea->infoDataChange(&CompanyPreviewData);
+    }
+    previewComArea->update();
+    previewComArea->show();
+    qApp->processEvents();
 }

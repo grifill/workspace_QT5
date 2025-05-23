@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QApplication>
 #include <QLabel>
 #include <QPixmap>
 #include <QGridLayout>
@@ -44,9 +45,8 @@ public:
 
     CustomTable *model;
     CompanyPreviewArea *previewComArea;
-
-
     CompanyPreviewAreaInfo CompanyPreviewData;
+
 private slots:
     //void screenChanged();
     void about();

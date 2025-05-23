@@ -4,22 +4,13 @@
 CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *data)
     : QWidget(parent) {
 
-    QGridLayout *mainLayout = new QGridLayout(this);
+    QGridLayout *companyPreviewAreaLayout = new QGridLayout(this);
 
     // Logo ==============================================================================
-    QString logoCompany = data->logoPATH;
-    QPixmap pixmap = QPixmap(logoCompany);
-    QLabel *ico = new QLabel(this);
-    ico->setAlignment(Qt::AlignmentFlag::AlignHCenter);
-    ico->setPixmap(pixmap.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    icoCompany = createIcoLabel(data->logoPATH);
 
     // Name ==============================================================================
-    QLabel *name = new QLabel(tr("<b>%1</b>").arg(data->nameCompany));
-    name->setAlignment(Qt::AlignmentFlag::AlignHCenter);
-
-    /*QLabel *name = new QLabel(this);
-    name->setAlignment(Qt::AlignmentFlag::AlignHCenter);
-    name->setText(nameCompany);*/
+    nameCompany = createNameLabel(data->nameCompany);
 
     // Table =============================================================================
     int row = 10;
@@ -48,9 +39,9 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
 
     table->setFormat(tableFormat);
 
-    mainLayout->addWidget(ico);
-    mainLayout->addWidget(name);
-    mainLayout->addWidget(tableInfoCompany);
+    companyPreviewAreaLayout->addWidget(icoCompany);
+    companyPreviewAreaLayout->addWidget(nameCompany);
+    companyPreviewAreaLayout->addWidget(tableInfoCompany);
 }
 
 // Insert text with specified alignment in specified cell
@@ -75,7 +66,34 @@ void CompanyPreviewArea::insertAlignedText(QTextTable *table, int row, int col, 
     textCursor.insertText(text);
 }
 
-void CompanyPreviewArea::infoDataChange(CompanyPreviewAreaInfo *newData)
+QLabel *CompanyPreviewArea::createNameLabel(const QString &text)
 {
-    emit companyPreviewAreaInfoDataChanged(newData);
+    QLabel *label = new QLabel(tr("<b>%1</b>").arg(text));
+    label->setAlignment(Qt::AlignmentFlag::AlignHCenter);
+    label->update();
+    return label;
+}
+
+QLabel *CompanyPreviewArea::createIcoLabel(const QString &text)
+{
+    QLabel *ico = new QLabel();
+    const QPixmap pixmap = QPixmap(text);
+    ico->setAlignment(Qt::AlignmentFlag::AlignHCenter);
+    ico->setPixmap(pixmap.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ico->update();
+    return ico;
+}
+
+void CompanyPreviewArea::infoDataChange(CompanyPreviewAreaInfo *data)
+{
+    qDebug("infoDataChange --- >>>");
+
+    nameCompany = createNameLabel(data->nameCompany);
+    //icoCompany = createIcoLabel(data->logoPATH);
+
+    nameCompany->update();
+
+    // Icon
+    //emit companyPreviewAreaInfoDataChanged(data);
+    qApp->processEvents();
 }

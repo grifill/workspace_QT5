@@ -20,5 +20,7 @@
         <file>companies/ico/TATN_512x512.png</file>
         <file>companies/ico/VTBR_512x512.png</file>
         <file>companies/ico/ELFV_512x512.png</file>
+        <file>companies/ico/ROLO_512x512.png</file>
+        <file>companies/ico/SELG_512x512.png</file>
     </qresource>
 </RCC>
