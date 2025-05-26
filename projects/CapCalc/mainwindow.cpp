@@ -49,11 +49,12 @@ MainWindow::MainWindow() {
 
     // 4. Signals & slots =======================================
     connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
+    //connect(previewComArea, SIGNAL(infoDataChanged(&CompanyPreviewData)), this, SLOT(infoDataChange()));
     //connect(previewComArea, SIGNAL(reprint(const QString &)), SLOT(infoDataChange(const CompanyPreviewAreaInfo &)));
 
     // 5. Create Main Layout =======================================
-    QWidget *placeholderWidget = new QWidget;
-    QGridLayout *mainLayout = new QGridLayout(centralWidget);
+    placeholderWidget = new QWidget;
+    mainLayout = new QGridLayout(centralWidget);
 
     mainLayout->addLayout(choiseLayout, 0, 0, Qt::AlignLeft | Qt::AlignTop);
 
@@ -96,7 +97,5 @@ void MainWindow::reprint(const QString &company) {
         CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
         previewComArea->infoDataChange(&CompanyPreviewData);
     }
-    previewComArea->update();
-    previewComArea->show();
     qApp->processEvents();
 }

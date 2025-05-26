@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QTextTable>
 #include <QTextEdit>
+#include <QGridLayout>
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -25,18 +26,22 @@ class CompanyPreviewArea : public QWidget
 
 public:
     explicit CompanyPreviewArea(QWidget *parent = nullptr, CompanyPreviewAreaInfo *data = nullptr);
-
-public slots:
     void infoDataChange(CompanyPreviewAreaInfo *data);
+signals:
+    void infoDataChanged(CompanyPreviewAreaInfo *data);
 
 private:
     void insertAlignedText(QTextTable *table, int row, int col, Qt::Alignment alignment, QString text);
     QLabel *createNameLabel(const QString &text);
     QLabel *createIcoLabel(const QString &text);
+    QLabel *newNameLabel(QLabel *name, const QString &text);
+    QLabel *newIcoLabel(QLabel *ico, const QString &text);
 
     QString logoCompany;
     QLabel *nameCompany;
     QLabel *icoCompany;
+    QTextEdit *tableInfoCompany;
+    QGridLayout *companyPreviewAreaLayout;
 };
 
 #endif // COMPANY_PREVIEW_AREA_H

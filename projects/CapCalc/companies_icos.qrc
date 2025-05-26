@@ -22,5 +22,14 @@
         <file>companies/ico/ELFV_512x512.png</file>
         <file>companies/ico/ROLO_512x512.png</file>
         <file>companies/ico/SELG_512x512.png</file>
+        <file>companies/ico/ALRS_512x512.png</file>
+        <file>companies/ico/CBOM_512x512.png</file>
+        <file>companies/ico/CHMF_512x512.png</file>
+        <file>companies/ico/GMKN_512x512.png</file>
+        <file>companies/ico/MAGN_512x512.png</file>
+        <file>companies/ico/NLMK_512x512.png</file>
+        <file>companies/ico/SVCB_512x512.png</file>
+        <file>companies/ico/T_512x512.png</file>
+        <file>companies/ico/TRNFP_512x512.png</file>
     </qresource>
 </RCC>

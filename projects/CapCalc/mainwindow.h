@@ -47,10 +47,14 @@ public:
     CompanyPreviewArea *previewComArea;
     CompanyPreviewAreaInfo CompanyPreviewData;
 
+    QWidget *placeholderWidget;
+    QGridLayout *mainLayout;
+
+public slots:
+    void reprint(const QString &company);
 private slots:
     //void screenChanged();
     void about();
-    void reprint(const QString &company);
 private:
     void createActions();
      //QLabel *devicePixelRatioLabel;
