@@ -23,6 +23,7 @@ MainWindow::MainWindow() {
     // Add Item Block
     choiseCompany->addItem("ПАО АНК «Башнефть»");
     choiseCompany->addItem("ПАО «НК Роснефть»");
+    choiseCompany->addItem("ПАО «Сбербанк России»");
 
     // Add
     choiseLayout->addWidget(choiseCompanyName);
@@ -95,6 +96,12 @@ void MainWindow::reprint(const QString &company) {
         qDebug("BANE");
         CompanyPreviewData.nameCompany = "ПАО АНК «Башнефть»";
         CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
+        previewComArea->infoDataChange(&CompanyPreviewData);
+    }
+    if (company == "ПАО «Сбербанк России»") {
+        qDebug("SBER");
+        CompanyPreviewData.nameCompany = "ПАО «Сбербанк России»";
+        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/SBER_512x512.png";
         previewComArea->infoDataChange(&CompanyPreviewData);
     }
     qApp->processEvents();
