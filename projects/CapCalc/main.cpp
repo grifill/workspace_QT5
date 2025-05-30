@@ -10,8 +10,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName(MainWindow::tr("CapCalc"));
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 
-
-
     MainWindow w;
     const QRect availableGeometry = QApplication::desktop()->availableGeometry(&w);
     w.resize(availableGeometry.width() / 2, availableGeometry.height() * 2 / 3);

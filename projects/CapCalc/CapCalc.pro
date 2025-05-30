@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Gregory Filatov
+# All rights reserved.
+
 # CapCalc proj
 
 QT += core gui
@@ -11,15 +14,15 @@ QMAKE_CXXFLAGS += -Wno-deprecated-copy
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    company_preview_area.cpp \
-    customtable.cpp \
+    companyPreviewArea.cpp \
+    companyTableArea.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     companies/BANE.h \
-    company_preview_area.h \
-    customtable.h \
+    companyPreviewArea.h \
+    companyTableArea.h \
     mainwindow.h
 
 RESOURCES += \

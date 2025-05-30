@@ -31,5 +31,9 @@
         <file>companies/ico/SVCB_512x512.png</file>
         <file>companies/ico/T_512x512.png</file>
         <file>companies/ico/TRNFP_512x512.png</file>
+        <file>companies/ico/FLOT_512x512.png</file>
+        <file>companies/ico/HYDR_512x512.png</file>
+        <file>companies/ico/MTLR_512x512.png</file>
+        <file>companies/ico/RTKM_512x512.png</file>
     </qresource>
 </RCC>

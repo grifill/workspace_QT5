@@ -1,5 +1,25 @@
+/**
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025 Gregory Filatov
+ * All rights reserved.
+ *
+ * \file   companyPreviewArea.cpp
+ * \author Gregory Filatov
+ * \date   30 May 2025
+ * \version 1.0
+ *
+ * \brief  Contains company preview area data
+ *
+ * Module: companyPreviewArea.cpp
+ *
+ * Purpose: MyClass - file
+ *
+ * Functionality:
+ *     Environment
+ * ---------------------------------------------------------------------------
+ */
 #include <QtWidgets>
-#include "company_preview_area.h"
+#include "companyPreviewArea.h"
 
 CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *data)
     : QWidget(parent) {
@@ -34,8 +54,28 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
     }
     tableFormat.setColumnWidthConstraints(colLength);*/
 
-    insertAlignedText(table, 0, 0, Qt::AlignCenter, "aaa");
-    insertAlignedText(table, 0, 1, Qt::AlignCenter, "bbb");
+    // Colomn Param
+    insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");
+    insertAlignedText(table, 1, 0, Qt::AlignCenter, "ISIN");
+    insertAlignedText(table, 2, 0, Qt::AlignCenter, "Год основания");
+    insertAlignedText(table, 3, 0, Qt::AlignCenter, "Страна");
+    insertAlignedText(table, 4, 0, Qt::AlignCenter, "Расположение");
+    insertAlignedText(table, 5, 0, Qt::AlignCenter, "Отрасль");
+    insertAlignedText(table, 6, 0, Qt::AlignCenter, "Вид собственности");
+    insertAlignedText(table, 7, 0, Qt::AlignCenter, "Дивидендная политика");
+    insertAlignedText(table, 8, 0, Qt::AlignCenter, "Привилегированные акции");
+    insertAlignedText(table, 9, 0, Qt::AlignCenter, "Индекс IMOEX");
+
+    insertAlignedText(table, 0, 1, Qt::AlignCenter, data->compTicker);
+    insertAlignedText(table, 1, 1, Qt::AlignCenter, data->compISIN);
+    insertAlignedText(table, 2, 1, Qt::AlignCenter, data->compYear);
+    insertAlignedText(table, 3, 1, Qt::AlignCenter, data->compCountry);
+    insertAlignedText(table, 4, 1, Qt::AlignCenter, data->compAddr);
+    insertAlignedText(table, 5, 1, Qt::AlignCenter, data->compIndustry);
+    insertAlignedText(table, 6, 1, Qt::AlignCenter, data->compProperty);
+    insertAlignedText(table, 7, 1, Qt::AlignCenter, data->compDivPol);
+    insertAlignedText(table, 8, 1, Qt::AlignCenter, data->compPref);
+    insertAlignedText(table, 9, 1, Qt::AlignCenter, data->compIMOEX);
 
     table->setFormat(tableFormat);
 

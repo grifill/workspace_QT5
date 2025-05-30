@@ -1,6 +1,25 @@
-#ifndef CUSTOMTABLE_H
-#define CUSTOMTABLE_H
-
+/**
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025 Gregory Filatov
+ * All rights reserved.
+ *
+ * \file   companyTableArea.h
+ * \author Gregory Filatov
+ * \date   30 May 2025
+ * \version 1.0
+ *
+ * \brief  Contains company table area data
+ *
+ * Module: companyTableArea.h
+ *
+ * Purpose: MyClass - file
+ *
+ * Functionality:
+ *     Environment
+ * ---------------------------------------------------------------------------
+ */
+#ifndef COMPANYTABLEAREA_H
+#define COMPANYTABLEAREA_H
 
 #include <QtCore/QAbstractTableModel>
 #include <QtCore/QHash>
@@ -30,4 +49,4 @@ private:
     int m_rowCount;
 };
 
-#endif // CUSTOMTABLE_H
+#endif // COMPANYTABLEAREA_H

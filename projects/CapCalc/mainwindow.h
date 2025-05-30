@@ -1,3 +1,23 @@
+/**
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025 Gregory Filatov
+ * All rights reserved.
+ *
+ * \file   mainwindow.h
+ * \author Gregory Filatov
+ * \date   30 May 2025
+ * \version 1.0
+ *
+ * \brief  Contains main - mainwindow
+ *
+ * Module: mainwindow.h
+ *
+ * Purpose: Mainwindow - file
+ *
+ * Functionality:
+ *     Environment
+ * ---------------------------------------------------------------------------
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -19,8 +39,8 @@
 #include <QFrame>
 #include <QLineEdit>
 
-#include "customtable.h"
-#include "company_preview_area.h"
+#include "companyTableArea.h"
+#include "companyPreviewArea.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;

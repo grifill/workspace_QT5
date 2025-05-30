@@ -1,4 +1,24 @@
-#include "customtable.h"
+/**
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025 Gregory Filatov
+ * All rights reserved.
+ *
+ * \file   companyTableArea.cpp
+ * \author Gregory Filatov
+ * \date   30 May 2025
+ * \version 1.0
+ *
+ * \brief  Contains company table area data
+ *
+ * Module: companyTableArea.cpp
+ *
+ * Purpose: MyClass - file
+ *
+ * Functionality:
+ *     Environment
+ * ---------------------------------------------------------------------------
+ */
+#include "companyTableArea.h"
 #include <QtCore/QVector>
 #include <QtCore/QTime>
 #include <QtCore/QRect>

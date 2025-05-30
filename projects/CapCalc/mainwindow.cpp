@@ -1,5 +1,25 @@
+/**
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025 Gregory Filatov
+ * All rights reserved.
+ *
+ * \file   mainwindow.cpp
+ * \author Gregory Filatov
+ * \date   30 May 2025
+ * \version 1.0
+ *
+ * \brief  Contains main - mainwindow
+ *
+ * Module: mainwindow.cpp
+ *
+ * Purpose: Mainwindow - file
+ *
+ * Functionality:
+ *     Environment
+ * ---------------------------------------------------------------------------
+ */
 #include "mainwindow.h"
-#include "company_preview_area.h"
+#include "companyPreviewArea.h"
 
 MainWindow::MainWindow() {
 
@@ -34,10 +54,22 @@ MainWindow::MainWindow() {
     CompanyPreviewData.nameCompany = "ПАО АНК «Башнефть»";
     CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
 
+    // Table
+    CompanyPreviewData.compTicker  = "BANE";
+    CompanyPreviewData.compISIN    = "RU0007976957";
+    CompanyPreviewData.compYear    = "1945";
+    CompanyPreviewData.compCountry = "Россия";
+    CompanyPreviewData.compAddr    = "Республика Башкортостан, г. Уфа, ул. Карла Маркса, д. 30/1";
+    CompanyPreviewData.compIndustry = "Добыча/переработка нефти и газа, реализации нефтепродуктов и продуктов нефтехимии";
+    CompanyPreviewData.compProperty = "Дочерняя компания";
+    CompanyPreviewData.compDivPol = "25% от МСФО";
+    CompanyPreviewData.compPref = "ДА";
+    CompanyPreviewData.compIMOEX = "НЕТ";
+
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
     previewComArea = new CompanyPreviewArea(previewGroupBox, &CompanyPreviewData);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
-    previewGroupBox->setMinimumSize(300,600);
+    previewGroupBox->setMinimumSize(350,620);
     previewLayout->addWidget(previewComArea);
 
     // ==============================================
