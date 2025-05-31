@@ -25,12 +25,12 @@
 #include <QtCore/QHash>
 #include <QtCore/QRect>
 
-class CustomTable : public QAbstractTableModel
+class CompanyTableArea : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit CustomTable(QObject *parent = 0);
-    virtual ~CustomTable();
+    explicit CompanyTableArea(QObject *parent = 0);
+    virtual ~CompanyTableArea();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;

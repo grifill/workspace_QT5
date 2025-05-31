@@ -25,11 +25,12 @@
 #include <QtCore/QRandomGenerator>
 #include <QtGui/QColor>
 
-CustomTable::CustomTable(QObject *parent) :
+
+CompanyTableArea::CompanyTableArea(QObject *parent) :
     QAbstractTableModel(parent)
 {
-    m_columnCount = 6;
-    m_rowCount = 12;
+    m_columnCount = 5;
+    m_rowCount = 6;
 
     // m_data
     for (int i = 0; i < m_rowCount; i++) {
@@ -44,35 +45,35 @@ CustomTable::CustomTable(QObject *parent) :
     }
 }
 
-CustomTable::~CustomTable()
+CompanyTableArea::~CompanyTableArea()
 {
     qDeleteAll(m_data);
 }
 
-int CustomTable::rowCount(const QModelIndex &parent) const
+int CompanyTableArea::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return m_data.count();
 }
 
-int CustomTable::columnCount(const QModelIndex &parent) const
+int CompanyTableArea::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return m_columnCount;
 }
 
-QVariant CustomTable::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CompanyTableArea::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role != Qt::DisplayRole)
         return QVariant();
 
     if (orientation == Qt::Horizontal)
-        return QString("201%1").arg(section);
+        return QString("202%0").arg(section);
     else
         return QString("%1").arg(section + 1);
 }
 
-QVariant CustomTable::data(const QModelIndex &index, int role) const
+QVariant CompanyTableArea::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole) {
         return m_data[index.row()]->at(index.column());
@@ -90,7 +91,7 @@ QVariant CustomTable::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-bool CustomTable::setData(const QModelIndex &index, const QVariant &value, int role)
+bool CompanyTableArea::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (index.isValid() && role == Qt::EditRole) {
         m_data[index.row()]->replace(index.column(), value.toDouble());
@@ -100,12 +101,12 @@ bool CustomTable::setData(const QModelIndex &index, const QVariant &value, int r
     return false;
 }
 
-Qt::ItemFlags CustomTable::flags(const QModelIndex &index) const
+Qt::ItemFlags CompanyTableArea::flags(const QModelIndex &index) const
 {
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-void CustomTable::addMapping(QString color, QRect area)
+void CompanyTableArea::addMapping(QString color, QRect area)
 {
     m_mapping.insertMulti(color, area);
 }

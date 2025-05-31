@@ -73,13 +73,13 @@ MainWindow::MainWindow() {
     previewLayout->addWidget(previewComArea);
 
     // ==============================================
-    model = new CustomTable;
+    mainTable = new CompanyTableArea;
     QTableView *tableView = new QTableView;
-    tableView->setModel(model);
-    tableView->setMinimumWidth(300);
+    tableView->setModel(mainTable);
+    tableView->setMinimumWidth(500);
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    model->setParent(tableView);
+    mainTable->setParent(tableView);
 
     // 4. Signals & slots =======================================
     connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);

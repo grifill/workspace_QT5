@@ -63,7 +63,7 @@ public:
     MainWindow();
     void show();
 
-    CustomTable *model;
+    CompanyTableArea *mainTable;
     CompanyPreviewArea *previewComArea;
     CompanyPreviewAreaInfo CompanyPreviewData;
 
