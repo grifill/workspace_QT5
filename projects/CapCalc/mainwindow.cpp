@@ -76,9 +76,12 @@ MainWindow::MainWindow() {
     mainTable = new CompanyTableArea;
     QTableView *tableView = new QTableView;
     tableView->setModel(mainTable);
-    tableView->setMinimumWidth(500);
+    tableView->setMinimumWidth(800);
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    tableView->setStyleSheet("QHeaderView::section { background-color: lightblue; color: darkBlue; }");
+    tableView->verticalHeader()->setStyleSheet("QHeaderView::section { font-weight: bold; }");
     mainTable->setParent(tableView);
 
     // 4. Signals & slots =======================================

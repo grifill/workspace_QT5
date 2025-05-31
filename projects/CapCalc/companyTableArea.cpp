@@ -62,15 +62,30 @@ int CompanyTableArea::columnCount(const QModelIndex &parent) const
     return m_columnCount;
 }
 
-QVariant CompanyTableArea::headerData(int section, Qt::Orientation orientation, int role) const
-{
+QVariant CompanyTableArea::headerData(int section, Qt::Orientation orientation, int role) const {
+
     if (role != Qt::DisplayRole)
         return QVariant();
 
+    // Vertical
+    if (orientation == Qt::Vertical) {
+        switch (section) {
+        case 0:
+            return QString("Выручка");
+        case 1:
+            return QString("Операционная прибыль");
+        case 2:
+            return QString("Собственный капитал");
+        }
+    }
+
+    // Horizontal
     if (orientation == Qt::Horizontal)
         return QString("202%0").arg(section);
     else
         return QString("%1").arg(section + 1);
+
+    return QVariant();
 }
 
 QVariant CompanyTableArea::data(const QModelIndex &index, int role) const
