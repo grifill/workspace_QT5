@@ -21,6 +21,9 @@
 #include "mainwindow.h"
 #include "companyPreviewArea.h"
 
+//MainWindow::~MainWindow(){
+//}
+
 MainWindow::MainWindow() {
 
     // 1. =========================================================
@@ -78,10 +81,12 @@ MainWindow::MainWindow() {
     tableView->setModel(mainTable);
     tableView->setMinimumWidth(800);
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter | Qt::AlignTop);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter | Qt::AlignTop);
 
-    tableView->setStyleSheet("QHeaderView::section { background-color: lightblue; color: darkBlue; }");
-    tableView->verticalHeader()->setStyleSheet("QHeaderView::section { font-weight: bold; }");
+    //tableView->setStyleSheet("QHeaderView::section { background-color: lightblue; color: darkBlue; }");
+    //tableView->verticalHeader()->setStyleSheet("QHeaderView::section { font-weight: bold; }");
     mainTable->setParent(tableView);
 
     // 4. Signals & slots =======================================

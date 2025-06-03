@@ -35,5 +35,10 @@
         <file>companies/ico/HYDR_512x512.png</file>
         <file>companies/ico/MTLR_512x512.png</file>
         <file>companies/ico/RTKM_512x512.png</file>
+        <file>companies/ico/AKRN_512x512.png</file>
+        <file>companies/ico/IRAO_512x512.png</file>
+        <file>companies/ico/KAZT_512x512.png</file>
+        <file>companies/ico/MSRS_512x512.png</file>
+        <file>companies/ico/PHOS_512x512.png</file>
     </qresource>
 </RCC>
