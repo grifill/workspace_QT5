@@ -85,8 +85,10 @@ MainWindow::MainWindow() {
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter | Qt::AlignTop);
 
-    //tableView->setStyleSheet("QHeaderView::section { background-color: lightblue; color: darkBlue; }");
+    tableView->setStyleSheet("QHeaderView::section { background-color: #FFFFDA; color: darkBlue; }");
     //tableView->verticalHeader()->setStyleSheet("QHeaderView::section { font-weight: bold; }");
+    //QString s = QString("border: 1px solid %1;").arg(QColor(255,8,8).name());
+    //tableView->setStyleSheet(s);
     mainTable->setParent(tableView);
 
     // 4. Signals & slots =======================================
