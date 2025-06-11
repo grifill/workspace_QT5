@@ -30,7 +30,7 @@ CompanyTableArea::CompanyTableArea(QObject *parent) :
     QAbstractTableModel(parent)
 {
     m_columnCount = 5;
-    m_rowCount = 6;
+    m_rowCount = 11;
 
     // m_data
     for (int i = 0; i < m_rowCount; i++) {
@@ -71,13 +71,31 @@ QVariant CompanyTableArea::headerData(int section, Qt::Orientation orientation, 
     if (orientation == Qt::Vertical) {
         switch (section) {
         case 0:
-            return QString("Выручка");
+            return QString("Выручка, млрд");
         case 1:
-            return QString("Операционная прибыль");
+            return QString("Операционная прибыль, млрд");
         case 2:
-            return QString("Собственный капитал");
+            return QString("Собственный капитал, млрд");
+        case 3:
+            return QString("Рентабельность собственного капитала, %");
+        case 4:
+            return QString("Чистая прибыль, млрд");
+        case 5:
+            return QString("Количество акций АО, шт");
+        case 6:
+            return QString("Количество акций АП, шт");
+        case 7:
+            return QString("Прибыль на акцию, руб");
+        case 8:
+            return QString("Дивиденды, млрд");
+        case 9:
+            return QString("Дивиденд на акцию АО, руб");
+        case 10:
+            return QString("Дивиденд на акцию АП, руб");
         }
     }
+
+
 
     // Horizontal
     if (orientation == Qt::Horizontal)
