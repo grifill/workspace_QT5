@@ -21,8 +21,12 @@
 #include "mainwindow.h"
 #include "companyPreviewArea.h"
 
-//MainWindow::~MainWindow(){
-//}
+MainWindow::~MainWindow()
+{
+    //delete placeholderWidget;
+    //delete mainLayout;
+}
+
 
 MainWindow::MainWindow() {
 
