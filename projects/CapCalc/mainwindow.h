@@ -38,6 +38,8 @@
 #include <QComboBox>
 #include <QFrame>
 #include <QLineEdit>
+#include <QSettings>
+#include <QDebug>
 
 #include "companyTableArea.h"
 #include "companyPreviewArea.h"

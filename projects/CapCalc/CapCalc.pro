@@ -20,12 +20,12 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    companies/BANE.h \
     companyPreviewArea.h \
     companyTableArea.h \
     mainwindow.h
 
 RESOURCES += \
+    companies_datas.qrc \
     companies_icos.qrc
 
 # Default rules for deployment.

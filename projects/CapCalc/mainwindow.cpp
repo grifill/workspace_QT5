@@ -112,6 +112,23 @@ MainWindow::MainWindow() {
     mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
+
+    QSettings settings("companies/datas/BANE.ini", QSettings::IniFormat);
+    QHash<QString,QString>values;
+
+    settings.beginGroup("main_info");
+    QStringList childKeys = settings.childKeys();
+    foreach (const QString &childKey,childKeys)
+    values.insert(childKey, settings.value(childKey).toString());
+    settings.endGroup();
+
+    settings.beginGroup("preview_info");
+    childKeys = settings.childKeys();
+    foreach (const QString &childKey,childKeys)
+    values.insert(childKey, settings.value(childKey).toString());
+    settings.endGroup();
+
+    qDebug()<<values;
 }
 
 void MainWindow::createActions() {
