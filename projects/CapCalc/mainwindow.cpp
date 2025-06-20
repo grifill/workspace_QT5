@@ -30,6 +30,8 @@ MainWindow::~MainWindow()
 
 MainWindow::MainWindow() {
 
+    setlocale(LC_ALL, "");
+
     // 1. =========================================================
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -113,7 +115,9 @@ MainWindow::MainWindow() {
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
 
-    QSettings settings("companies/datas/BANE.ini", QSettings::IniFormat);
+    QTextCodec *codec = QTextCodec::codecForName("utf-8");
+    QSettings settings(":/companies_datas/companies/BANE.ini", QSettings::IniFormat);
+    settings.setIniCodec(codec);
     QHash<QString,QString>values;
 
     settings.beginGroup("main_info");
@@ -128,7 +132,7 @@ MainWindow::MainWindow() {
     values.insert(childKey, settings.value(childKey).toString());
     settings.endGroup();
 
-    qDebug()<<values;
+    qDebug() << values.value("addr").toStdString().c_str();
 }
 
 void MainWindow::createActions() {

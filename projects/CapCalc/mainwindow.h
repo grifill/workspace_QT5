@@ -40,6 +40,8 @@
 #include <QLineEdit>
 #include <QSettings>
 #include <QDebug>
+#include <QtCore>
+#include <QTextCodec>
 
 #include "companyTableArea.h"
 #include "companyPreviewArea.h"
