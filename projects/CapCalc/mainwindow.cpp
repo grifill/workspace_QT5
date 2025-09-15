@@ -49,6 +49,13 @@ MainWindow::MainWindow() {
     choiseCompany->lineEdit()->setReadOnly(true);
     choiseCompany->lineEdit()->setAlignment(Qt::AlignCenter);
 
+    // 4. Scan .ini files
+    QDir directory(":/companies_datas/companies/ini");
+    QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI",QDir::Files);
+    foreach(QString filename, ini_files) {
+        qDebug() << filename;
+    }
+
     // Add Item Block
     choiseCompany->addItem("ПАО АНК «Башнефть»");
     choiseCompany->addItem("ПАО «НК Роснефть»");

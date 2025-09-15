@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/companies_datas">
-        <file>companies/BANE.ini</file>
+        <file>companies/ini/BANE.ini</file>
+        <file>companies/ini/ROSN.ini</file>
     </qresource>
 </RCC>
