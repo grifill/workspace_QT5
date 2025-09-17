@@ -30,7 +30,9 @@ MainWindow::~MainWindow()
 
 MainWindow::MainWindow() {
 
+    // Language Settings
     setlocale(LC_ALL, "");
+    QTextCodec *codec_ini = QTextCodec::codecForName("utf-8");
 
     // 1. =========================================================
     QWidget *centralWidget = new QWidget(this);
@@ -51,16 +53,21 @@ MainWindow::MainWindow() {
 
     // 4. Scan .ini files
     QDir directory(":/companies_datas/companies/ini");
-    QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI",QDir::Files);
+    QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI", QDir::Files);
     foreach(QString filename, ini_files) {
-        qDebug() << filename;
+        //qDebug() << filename;
+        QSettings company_sett(":/companies_datas/companies/ini/" + filename, QSettings::IniFormat);
+        company_sett.setIniCodec(codec_ini);
+        company_sett.beginGroup("main_info");
+        choiseCompany->addItem(company_sett.value("name", "").toString());
+        company_sett.endGroup();
     }
 
     // Add Item Block
-    choiseCompany->addItem("ПАО АНК «Башнефть»");
-    choiseCompany->addItem("ПАО «НК Роснефть»");
-    choiseCompany->addItem("ПАО «Сбербанк России»");
-    choiseCompany->addItem("ПАО «Группа Аренадата»");
+    //choiseCompany->addItem("ПАО АНК «Башнефть»");
+    //choiseCompany->addItem("ПАО «НК Роснефть»");
+    //choiseCompany->addItem("ПАО «Сбербанк России»");
+    //choiseCompany->addItem("ПАО «Группа Аренадата»");
 
     // Add
     choiseLayout->addWidget(choiseCompanyName);
