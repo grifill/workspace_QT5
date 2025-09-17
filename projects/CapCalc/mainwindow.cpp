@@ -32,7 +32,13 @@ MainWindow::MainWindow() {
 
     // Language Settings
     setlocale(LC_ALL, "");
-    QTextCodec *codec_ini = QTextCodec::codecForName("utf-8");
+    QTextCodec *codecINI = QTextCodec::codecForName("utf-8");
+
+    // Directory settings
+    const QString dirINI = ":/companies_datas/companies/ini";
+    const QString defaultINI = "BANE.ini";
+
+    // Default values (on start)
 
     // 1. =========================================================
     QWidget *centralWidget = new QWidget(this);
@@ -52,42 +58,47 @@ MainWindow::MainWindow() {
     choiseCompany->lineEdit()->setAlignment(Qt::AlignCenter);
 
     // 4. Scan .ini files
-    QDir directory(":/companies_datas/companies/ini");
+    QDir directory(dirINI);
     QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI", QDir::Files);
     foreach(QString filename, ini_files) {
+
         //qDebug() << filename;
-        QSettings company_sett(":/companies_datas/companies/ini/" + filename, QSettings::IniFormat);
-        company_sett.setIniCodec(codec_ini);
-        company_sett.beginGroup("main_info");
-        choiseCompany->addItem(company_sett.value("name", "").toString());
-        company_sett.endGroup();
+        QSettings companySett(dirINI + "/" + filename, QSettings::IniFormat);
+
+        // main_info
+        companySett.setIniCodec(codecINI);
+        companySett.beginGroup("main_info");
+        choiseCompany->addItem(companySett.value("name", "").toString());
+        companySett.endGroup();
     }
 
-    // Add Item Block
-    //choiseCompany->addItem("ПАО АНК «Башнефть»");
-    //choiseCompany->addItem("ПАО «НК Роснефть»");
-    //choiseCompany->addItem("ПАО «Сбербанк России»");
-    //choiseCompany->addItem("ПАО «Группа Аренадата»");
+    // Default Settings
+    QSettings companyDefault(dirINI + "/" + defaultINI, QSettings::IniFormat);
+    companyDefault.setIniCodec(codecINI);
+
+    // Main
+    companyDefault.beginGroup("main_info");
+    CompanyPreviewData.nameCompany = companyDefault.value("name", "").toString();
+    CompanyPreviewData.logoPATH = companyDefault.value("logo", "").toString();
+    companyDefault.endGroup();
+
+    // Preview
+    companyDefault.beginGroup("preview_info");
+    CompanyPreviewData.compTicker  = companyDefault.value("ticker", "").toString();
+    CompanyPreviewData.compISIN    = companyDefault.value("isin", "").toString();
+    CompanyPreviewData.compYear    = companyDefault.value("year", "").toString();
+    CompanyPreviewData.compCountry = companyDefault.value("country", "").toString();
+    CompanyPreviewData.compAddr    = companyDefault.value("addr", "").toString();
+    CompanyPreviewData.compIndustry = companyDefault.value("industry", "").toString();
+    CompanyPreviewData.compProperty = companyDefault.value("property", "").toString();
+    CompanyPreviewData.compDivPol = companyDefault.value("divPol", "").toString();
+    CompanyPreviewData.compPref = companyDefault.value("pref", "").toString();
+    CompanyPreviewData.compIMOEX = companyDefault.value("imoex", "").toString();
+    companyDefault.endGroup();
 
     // Add
     choiseLayout->addWidget(choiseCompanyName);
     choiseLayout->addWidget(choiseCompany);
-
-    // 4. Preview =================================================
-    CompanyPreviewData.nameCompany = "ПАО АНК «Башнефть»";
-    CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
-
-    // Table
-    CompanyPreviewData.compTicker  = "BANE";
-    CompanyPreviewData.compISIN    = "RU0007976957";
-    CompanyPreviewData.compYear    = "1945";
-    CompanyPreviewData.compCountry = "Россия";
-    CompanyPreviewData.compAddr    = "Республика Башкортостан, г. Уфа, ул. Карла Маркса, д. 30/1";
-    CompanyPreviewData.compIndustry = "Добыча/переработка нефти и газа, реализации нефтепродуктов и продуктов нефтехимии";
-    CompanyPreviewData.compProperty = "Дочерняя компания";
-    CompanyPreviewData.compDivPol = "25% от МСФО";
-    CompanyPreviewData.compPref = "ДА";
-    CompanyPreviewData.compIMOEX = "НЕТ";
 
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
     previewComArea = new CompanyPreviewArea(previewGroupBox, &CompanyPreviewData);
