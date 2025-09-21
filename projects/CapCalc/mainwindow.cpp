@@ -39,6 +39,29 @@ MainWindow::MainWindow() {
     const QString defaultINI = "BANE.ini";
 
     // Default values (on start)
+    // Default Settings
+    QSettings companyDefault(dirINI + "/" + defaultINI, QSettings::IniFormat);
+    companyDefault.setIniCodec(codecINI);
+
+    // Main
+    companyDefault.beginGroup("main_info");
+    CompanyPreviewData.nameCompany = companyDefault.value("name", "").toString();
+    CompanyPreviewData.logoPATH = companyDefault.value("logo", "").toString();
+    companyDefault.endGroup();
+
+    // Preview
+    companyDefault.beginGroup("preview_info");
+    CompanyPreviewData.compTicker  = companyDefault.value("ticker", "").toString();
+    CompanyPreviewData.compISIN    = companyDefault.value("isin", "").toString();
+    CompanyPreviewData.compYear    = companyDefault.value("year", "").toString();
+    CompanyPreviewData.compCountry = companyDefault.value("country", "").toString();
+    CompanyPreviewData.compAddr    = companyDefault.value("addr", "").toString();
+    CompanyPreviewData.compIndustry = companyDefault.value("industry", "").toString();
+    CompanyPreviewData.compProperty = companyDefault.value("property", "").toString();
+    CompanyPreviewData.compDivPol = companyDefault.value("divPol", "").toString();
+    CompanyPreviewData.compPref = companyDefault.value("pref", "").toString();
+    CompanyPreviewData.compIMOEX = companyDefault.value("imoex", "").toString();
+    companyDefault.endGroup();
 
     // 1. =========================================================
     QWidget *centralWidget = new QWidget(this);
@@ -71,30 +94,6 @@ MainWindow::MainWindow() {
         choiseCompany->addItem(companySett.value("name", "").toString());
         companySett.endGroup();
     }
-
-    // Default Settings
-    QSettings companyDefault(dirINI + "/" + defaultINI, QSettings::IniFormat);
-    companyDefault.setIniCodec(codecINI);
-
-    // Main
-    companyDefault.beginGroup("main_info");
-    CompanyPreviewData.nameCompany = companyDefault.value("name", "").toString();
-    CompanyPreviewData.logoPATH = companyDefault.value("logo", "").toString();
-    companyDefault.endGroup();
-
-    // Preview
-    companyDefault.beginGroup("preview_info");
-    CompanyPreviewData.compTicker  = companyDefault.value("ticker", "").toString();
-    CompanyPreviewData.compISIN    = companyDefault.value("isin", "").toString();
-    CompanyPreviewData.compYear    = companyDefault.value("year", "").toString();
-    CompanyPreviewData.compCountry = companyDefault.value("country", "").toString();
-    CompanyPreviewData.compAddr    = companyDefault.value("addr", "").toString();
-    CompanyPreviewData.compIndustry = companyDefault.value("industry", "").toString();
-    CompanyPreviewData.compProperty = companyDefault.value("property", "").toString();
-    CompanyPreviewData.compDivPol = companyDefault.value("divPol", "").toString();
-    CompanyPreviewData.compPref = companyDefault.value("pref", "").toString();
-    CompanyPreviewData.compIMOEX = companyDefault.value("imoex", "").toString();
-    companyDefault.endGroup();
 
     // Add
     choiseLayout->addWidget(choiseCompanyName);
