@@ -80,6 +80,13 @@ MainWindow::MainWindow() {
     choiseCompany->lineEdit()->setReadOnly(true);
     choiseCompany->lineEdit()->setAlignment(Qt::AlignCenter);
 
+    QPair<QString,QString> p( "Clinton", "Bill" );
+    QPair<QString,QString> m( "Clintonaa", "Billaa" );
+    QLinHeaderList a;
+    a.append(p);
+    a.append(m);
+    qDebug() << a;
+
     // 4. Scan .ini files
     QDir directory(dirINI);
     QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI", QDir::Files);

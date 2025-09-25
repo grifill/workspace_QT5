@@ -84,6 +84,8 @@ private:
     void createActions();
      //QLabel *devicePixelRatioLabel;
      //QLabel *screenNameLabel;
+    typedef QList<QPair<QString, QString>> QLinHeaderList;
+
 };
 
 #endif // MAINWINDOW_H
