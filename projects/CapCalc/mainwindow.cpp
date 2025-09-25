@@ -80,13 +80,6 @@ MainWindow::MainWindow() {
     choiseCompany->lineEdit()->setReadOnly(true);
     choiseCompany->lineEdit()->setAlignment(Qt::AlignCenter);
 
-    QPair<QString,QString> p( "Clinton", "Bill" );
-    QPair<QString,QString> m( "Clintonaa", "Billaa" );
-    QLinHeaderList a;
-    a.append(p);
-    a.append(m);
-    qDebug() << a;
-
     // 4. Scan .ini files
     QDir directory(dirINI);
     QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI", QDir::Files);
@@ -94,13 +87,22 @@ MainWindow::MainWindow() {
 
         //qDebug() << filename;
         QSettings companySett(dirINI + "/" + filename, QSettings::IniFormat);
+        QString mainName;
+        CompanyPreviewAreaInfo newCompPreview;
 
         // main_info
         companySett.setIniCodec(codecINI);
         companySett.beginGroup("main_info");
         choiseCompany->addItem(companySett.value("name", "").toString());
+        mainName = companySett.value("name", "").toString();
         companySett.endGroup();
+
+        //
+        QPair<QString,CompanyPreviewAreaInfo> newCompany(mainName, newCompPreview);
+        companiesView.append(newCompany);
     }
+    qDebug() << companiesView.at(0).first;
+    qDebug() << companiesView.at(1).first;
 
     // Add
     choiseLayout->addWidget(choiseCompanyName);

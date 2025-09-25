@@ -75,6 +75,9 @@ public:
     QWidget *placeholderWidget;
     QGridLayout *mainLayout;
 
+    typedef QList<QPair<QString, CompanyPreviewAreaInfo>> QLinPreviewList;
+    QLinPreviewList companiesView;
+
 public slots:
     void reprint(const QString &company);
 private slots:
@@ -84,8 +87,6 @@ private:
     void createActions();
      //QLabel *devicePixelRatioLabel;
      //QLabel *screenNameLabel;
-    typedef QList<QPair<QString, QString>> QLinHeaderList;
-
 };
 
 #endif // MAINWINDOW_H
