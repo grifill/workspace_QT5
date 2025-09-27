@@ -75,7 +75,7 @@ public:
     QWidget *placeholderWidget;
     QGridLayout *mainLayout;
 
-    typedef QList<QPair<QString, CompanyPreviewAreaInfo>> QLinPreviewList;
+    typedef QList<QPair<QString, CompanyPreviewAreaInfo> > QLinPreviewList;
     QLinPreviewList companiesView;
 
 public slots:

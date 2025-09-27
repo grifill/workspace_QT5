@@ -93,11 +93,32 @@ MainWindow::MainWindow() {
         // main_info
         companySett.setIniCodec(codecINI);
         companySett.beginGroup("main_info");
+
+        // for combobox
         choiseCompany->addItem(companySett.value("name", "").toString());
         mainName = companySett.value("name", "").toString();
+
+        // for main info preview
+        newCompPreview.nameCompany = companyDefault.value("name", "").toString();
+        newCompPreview.logoPATH = companyDefault.value("logo", "").toString();
+
         companySett.endGroup();
 
-        //
+        // for preview data
+        companyDefault.beginGroup("preview_info");
+        newCompPreview.compTicker  = companyDefault.value("ticker", "").toString();
+        newCompPreview.compISIN    = companyDefault.value("isin", "").toString();
+        newCompPreview.compYear    = companyDefault.value("year", "").toString();
+        newCompPreview.compCountry = companyDefault.value("country", "").toString();
+        newCompPreview.compAddr    = companyDefault.value("addr", "").toString();
+        newCompPreview.compIndustry = companyDefault.value("industry", "").toString();
+        newCompPreview.compProperty = companyDefault.value("property", "").toString();
+        newCompPreview.compDivPol = companyDefault.value("divPol", "").toString();
+        newCompPreview.compPref = companyDefault.value("pref", "").toString();
+        newCompPreview.compIMOEX = companyDefault.value("imoex", "").toString();
+        companyDefault.endGroup();
+
+        // Add to list
         QPair<QString,CompanyPreviewAreaInfo> newCompany(mainName, newCompPreview);
         companiesView.append(newCompany);
     }
@@ -156,13 +177,13 @@ MainWindow::MainWindow() {
     settings.beginGroup("main_info");
     QStringList childKeys = settings.childKeys();
     foreach (const QString &childKey,childKeys)
-    values.insert(childKey, settings.value(childKey).toString());
+        values.insert(childKey, settings.value(childKey).toString());
     settings.endGroup();
 
     settings.beginGroup("preview_info");
     childKeys = settings.childKeys();
     foreach (const QString &childKey,childKeys)
-    values.insert(childKey, settings.value(childKey).toString());
+        values.insert(childKey, settings.value(childKey).toString());
     settings.endGroup();
 
     qDebug() << values.value("addr").toStdString().c_str();
@@ -183,33 +204,20 @@ void MainWindow::show() {
 
 void MainWindow::about() {
     QMessageBox::about(this, tr("About CapCalc"),
-            tr("The <b>CapCalc</b> example"));
+                       tr("The <b>CapCalc</b> example"));
 }
 
 void MainWindow::reprint(const QString &company) {
-    if (company == "ПАО «НК Роснефть»") {
-        qDebug("ROSN");
-        CompanyPreviewData.nameCompany = "ПАО «НК Роснефть»";
-        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/ROSN_512x512.png";
-        previewComArea->infoDataChange(&CompanyPreviewData);
+
+    QPair<QString, CompanyPreviewAreaInfo> pair;
+    foreach (pair, companiesView) {
+        if (company == pair.first) {
+
+            // Change Data
+            previewComArea->infoDataChange(&CompanyPreviewData);
+            qDebug() << company;
+        }
     }
-    if (company == "ПАО АНК «Башнефть»") {
-        qDebug("BANE");
-        CompanyPreviewData.nameCompany = "ПАО АНК «Башнефть»";
-        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/BANE_512x512.png";
-        previewComArea->infoDataChange(&CompanyPreviewData);
-    }
-    if (company == "ПАО «Сбербанк России»") {
-        qDebug("SBER");
-        CompanyPreviewData.nameCompany = "ПАО «Сбербанк России»";
-        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/SBER_512x512.png";
-        previewComArea->infoDataChange(&CompanyPreviewData);
-    }
-    if (company == "ПАО «Группа Аренадата»") {
-        qDebug("DATA");
-        CompanyPreviewData.nameCompany = "ПАО «Группа Аренадата»";
-        CompanyPreviewData.logoPATH = ":/companies_icos/companies/ico/DATA_512x512.png";
-        previewComArea->infoDataChange(&CompanyPreviewData);
-    }
+
     qApp->processEvents();
 }
