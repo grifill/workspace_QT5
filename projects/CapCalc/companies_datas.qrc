@@ -2,5 +2,6 @@
     <qresource prefix="/companies_datas">
         <file>companies/ini/BANE.ini</file>
         <file>companies/ini/ROSN.ini</file>
+        <file>companies/ini/SBER.ini</file>
     </qresource>
 </RCC>
