@@ -38,31 +38,6 @@ MainWindow::MainWindow() {
     const QString dirINI = ":/companies_datas/companies/ini";
     const QString defaultINI = "BANE.ini";
 
-    // Default values (on start)
-    // Default Settings
-    QSettings companyDefault(dirINI + "/" + defaultINI, QSettings::IniFormat);
-    companyDefault.setIniCodec(codecINI);
-
-    // Main
-    companyDefault.beginGroup("main_info");
-    CompanyPreviewData.nameCompany = companyDefault.value("name", "").toString();
-    CompanyPreviewData.logoPATH = companyDefault.value("logo", "").toString();
-    companyDefault.endGroup();
-
-    // Preview
-    companyDefault.beginGroup("preview_info");
-    CompanyPreviewData.compTicker  = companyDefault.value("ticker", "").toString();
-    CompanyPreviewData.compISIN    = companyDefault.value("isin", "").toString();
-    CompanyPreviewData.compYear    = companyDefault.value("year", "").toString();
-    CompanyPreviewData.compCountry = companyDefault.value("country", "").toString();
-    CompanyPreviewData.compAddr    = companyDefault.value("addr", "").toString();
-    CompanyPreviewData.compIndustry = companyDefault.value("industry", "").toString();
-    CompanyPreviewData.compProperty = companyDefault.value("property", "").toString();
-    CompanyPreviewData.compDivPol = companyDefault.value("divPol", "").toString();
-    CompanyPreviewData.compPref = companyDefault.value("pref", "").toString();
-    CompanyPreviewData.compIMOEX = companyDefault.value("imoex", "").toString();
-    companyDefault.endGroup();
-
     // 1. =========================================================
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
@@ -80,7 +55,7 @@ MainWindow::MainWindow() {
     choiseCompany->lineEdit()->setReadOnly(true);
     choiseCompany->lineEdit()->setAlignment(Qt::AlignCenter);
 
-    // 4. Scan .ini files
+    // 4. Scan .ini files =========================================
     QDir directory(dirINI);
     QStringList ini_files = directory.entryList(QStringList() << "*.ini" << "*.INI", QDir::Files);
     foreach(QString filename, ini_files) {
@@ -99,31 +74,34 @@ MainWindow::MainWindow() {
         mainName = companySett.value("name", "").toString();
 
         // for main info preview
-        newCompPreview.nameCompany = companyDefault.value("name", "").toString();
-        newCompPreview.logoPATH = companyDefault.value("logo", "").toString();
+        newCompPreview.nameCompany = companySett.value("name", "").toString();
+        newCompPreview.logoPATH = companySett.value("logo", "").toString();
 
         companySett.endGroup();
 
         // for preview data
-        companyDefault.beginGroup("preview_info");
-        newCompPreview.compTicker  = companyDefault.value("ticker", "").toString();
-        newCompPreview.compISIN    = companyDefault.value("isin", "").toString();
-        newCompPreview.compYear    = companyDefault.value("year", "").toString();
-        newCompPreview.compCountry = companyDefault.value("country", "").toString();
-        newCompPreview.compAddr    = companyDefault.value("addr", "").toString();
-        newCompPreview.compIndustry = companyDefault.value("industry", "").toString();
-        newCompPreview.compProperty = companyDefault.value("property", "").toString();
-        newCompPreview.compDivPol = companyDefault.value("divPol", "").toString();
-        newCompPreview.compPref = companyDefault.value("pref", "").toString();
-        newCompPreview.compIMOEX = companyDefault.value("imoex", "").toString();
-        companyDefault.endGroup();
+        companySett.beginGroup("preview_info");
+        newCompPreview.compTicker  = companySett.value("ticker", "").toString();
+        newCompPreview.compISIN    = companySett.value("isin", "").toString();
+        newCompPreview.compYear    = companySett.value("year", "").toString();
+        newCompPreview.compCountry = companySett.value("country", "").toString();
+        newCompPreview.compAddr    = companySett.value("addr", "").toString();
+        newCompPreview.compIndustry = companySett.value("industry", "").toString();
+        newCompPreview.compProperty = companySett.value("property", "").toString();
+        newCompPreview.compDivPol = companySett.value("divPol", "").toString();
+        newCompPreview.compPref = companySett.value("pref", "").toString();
+        newCompPreview.compIMOEX = companySett.value("imoex", "").toString();
+        companySett.endGroup();
 
         // Add to list
         QPair<QString,CompanyPreviewAreaInfo> newCompany(mainName, newCompPreview);
         companiesView.append(newCompany);
+
+        // Default cfg
+        if (defaultINI == filename) {
+            CompanyPreviewData = newCompPreview;
+        }
     }
-    qDebug() << companiesView.at(0).first;
-    qDebug() << companiesView.at(1).first;
 
     // Add
     choiseLayout->addWidget(choiseCompanyName);
