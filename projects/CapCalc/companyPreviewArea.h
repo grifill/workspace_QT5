@@ -5,12 +5,12 @@
  *
  * \file   companyPreviewArea.h
  * \author Gregory Filatov
- * \date   30 May 2025
- * \version 1.0
+ * \date   29 September 2025
+ * \version 1.1
  *
  * \brief  Contains company preview area data
  *
- * Module: companyPreviewArea.h
+ * Module: companyPreviewArea
  *
  * Purpose: MyClass - file
  *
@@ -64,15 +64,19 @@ signals:
 
 private:
     void insertAlignedText(QTextTable *table, int row, int col, Qt::Alignment alignment, QString text);
+
     QLabel *createNameLabel(const QString &text);
     QLabel *createIcoLabel(const QString &text);
+    QTextEdit *createTableLabel(const CompanyPreviewAreaInfo &data);
+
     QLabel *newNameLabel(QLabel *name, const QString &text);
     QLabel *newIcoLabel(QLabel *ico, const QString &text);
+    QTextEdit *newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data);
 
-    QString logoCompany;
     QLabel *nameCompany;
     QLabel *icoCompany;
     QTextEdit *tableInfoCompany;
+
     QGridLayout *companyPreviewAreaLayout;
 };
 

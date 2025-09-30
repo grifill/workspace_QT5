@@ -5,12 +5,12 @@
  *
  * \file   companyPreviewArea.cpp
  * \author Gregory Filatov
- * \date   30 May 2025
- * \version 1.0
+ * \date   29 September 2025
+ * \version 1.1
  *
  * \brief  Contains company preview area data
  *
- * Module: companyPreviewArea.cpp
+ * Module: companyPreviewArea
  *
  * Purpose: MyClass - file
  *
@@ -33,51 +33,7 @@ CompanyPreviewArea::CompanyPreviewArea(QWidget *parent, CompanyPreviewAreaInfo *
     nameCompany = createNameLabel(data->nameCompany);
 
     // Table =============================================================================
-    int row = 10;
-    int col = 2;
-    tableInfoCompany = new QTextEdit;
-    tableInfoCompany->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    QTextCursor cursor(tableInfoCompany->textCursor());
-    QTextTable *table = cursor.insertTable(row, col);
-    QTextTableFormat tableFormat = table->format();
-    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-    tableFormat.setAlignment(Qt::AlignCenter);
-    tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
-    tableFormat.setBorderBrush(Qt::lightGray);
-    tableFormat.setCellPadding(0);
-    tableFormat.setCellSpacing(0);
-
-    //Set the columnWidthConstraints constraints of the table
-    /*QVector<QTextLength> colLength = tableFormat.columnWidthConstraints();
-    for (int i = 0; i < col; ++i) {
-        colLength.append(QTextLength(QTextLength::FixedLength,tableFormat.width().rawValue()/col));
-    }
-    tableFormat.setColumnWidthConstraints(colLength);*/
-
-    // Colomn Param
-    insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");
-    insertAlignedText(table, 1, 0, Qt::AlignCenter, "ISIN");
-    insertAlignedText(table, 2, 0, Qt::AlignCenter, "Год основания");
-    insertAlignedText(table, 3, 0, Qt::AlignCenter, "Страна");
-    insertAlignedText(table, 4, 0, Qt::AlignCenter, "Расположение");
-    insertAlignedText(table, 5, 0, Qt::AlignCenter, "Отрасль");
-    insertAlignedText(table, 6, 0, Qt::AlignCenter, "Вид собственности");
-    insertAlignedText(table, 7, 0, Qt::AlignCenter, "Дивидендная политика");
-    insertAlignedText(table, 8, 0, Qt::AlignCenter, "Привилегированные акции");
-    insertAlignedText(table, 9, 0, Qt::AlignCenter, "Индекс IMOEX");
-
-    insertAlignedText(table, 0, 1, Qt::AlignCenter, data->compTicker);
-    insertAlignedText(table, 1, 1, Qt::AlignCenter, data->compISIN);
-    insertAlignedText(table, 2, 1, Qt::AlignCenter, data->compYear);
-    insertAlignedText(table, 3, 1, Qt::AlignCenter, data->compCountry);
-    insertAlignedText(table, 4, 1, Qt::AlignCenter, data->compAddr);
-    insertAlignedText(table, 5, 1, Qt::AlignCenter, data->compIndustry);
-    insertAlignedText(table, 6, 1, Qt::AlignCenter, data->compProperty);
-    insertAlignedText(table, 7, 1, Qt::AlignCenter, data->compDivPol);
-    insertAlignedText(table, 8, 1, Qt::AlignCenter, data->compPref);
-    insertAlignedText(table, 9, 1, Qt::AlignCenter, data->compIMOEX);
-
-    table->setFormat(tableFormat);
+    tableInfoCompany = createTableLabel(*data);
 
     companyPreviewAreaLayout->addWidget(icoCompany);
     companyPreviewAreaLayout->addWidget(nameCompany);
@@ -134,6 +90,91 @@ QLabel *CompanyPreviewArea::newIcoLabel(QLabel *ico, const QString &text) {
     ico->setPixmap(pixmap.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     ico->update();
     return ico;
+}
+
+QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &data) {
+    int row = 10;
+    int col = 2;
+    tableInfoCompany = new QTextEdit;
+    tableInfoCompany->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    QTextCursor cursor(tableInfoCompany->textCursor());
+    QTextTable *table = cursor.insertTable(row, col);
+    QTextTableFormat tableFormat = table->format();
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    tableFormat.setAlignment(Qt::AlignCenter);
+    tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
+    tableFormat.setBorderBrush(Qt::lightGray);
+    tableFormat.setCellPadding(0);
+    tableFormat.setCellSpacing(0);
+
+    // Colomn Param
+    insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");
+    insertAlignedText(table, 1, 0, Qt::AlignCenter, "ISIN");
+    insertAlignedText(table, 2, 0, Qt::AlignCenter, "Год основания");
+    insertAlignedText(table, 3, 0, Qt::AlignCenter, "Страна");
+    insertAlignedText(table, 4, 0, Qt::AlignCenter, "Расположение");
+    insertAlignedText(table, 5, 0, Qt::AlignCenter, "Отрасль");
+    insertAlignedText(table, 6, 0, Qt::AlignCenter, "Вид собственности");
+    insertAlignedText(table, 7, 0, Qt::AlignCenter, "Дивидендная политика");
+    insertAlignedText(table, 8, 0, Qt::AlignCenter, "Привилегированные акции");
+    insertAlignedText(table, 9, 0, Qt::AlignCenter, "Индекс IMOEX");
+
+    insertAlignedText(table, 0, 1, Qt::AlignCenter, data.compTicker);
+    insertAlignedText(table, 1, 1, Qt::AlignCenter, data.compISIN);
+    insertAlignedText(table, 2, 1, Qt::AlignCenter, data.compYear);
+    insertAlignedText(table, 3, 1, Qt::AlignCenter, data.compCountry);
+    insertAlignedText(table, 4, 1, Qt::AlignCenter, data.compAddr);
+    insertAlignedText(table, 5, 1, Qt::AlignCenter, data.compIndustry);
+    insertAlignedText(table, 6, 1, Qt::AlignCenter, data.compProperty);
+    insertAlignedText(table, 7, 1, Qt::AlignCenter, data.compDivPol);
+    insertAlignedText(table, 8, 1, Qt::AlignCenter, data.compPref);
+    insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
+
+    table->setFormat(tableFormat);
+    tableInfoCompany->update();
+    return tableInfoCompany;
+}
+
+QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data) {
+    int row = 10;
+    int col = 2;
+    name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    QTextCursor cursor(name->textCursor());
+    QTextTable *table = cursor.insertTable(row, col);
+    QTextTableFormat tableFormat = table->format();
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    tableFormat.setAlignment(Qt::AlignCenter);
+    tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
+    tableFormat.setBorderBrush(Qt::lightGray);
+    tableFormat.setCellPadding(0);
+    tableFormat.setCellSpacing(0);
+
+    // Colomn Param
+    insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");
+    insertAlignedText(table, 1, 0, Qt::AlignCenter, "ISIN");
+    insertAlignedText(table, 2, 0, Qt::AlignCenter, "Год основания");
+    insertAlignedText(table, 3, 0, Qt::AlignCenter, "Страна");
+    insertAlignedText(table, 4, 0, Qt::AlignCenter, "Расположение");
+    insertAlignedText(table, 5, 0, Qt::AlignCenter, "Отрасль");
+    insertAlignedText(table, 6, 0, Qt::AlignCenter, "Вид собственности");
+    insertAlignedText(table, 7, 0, Qt::AlignCenter, "Дивидендная политика");
+    insertAlignedText(table, 8, 0, Qt::AlignCenter, "Привилегированные акции");
+    insertAlignedText(table, 9, 0, Qt::AlignCenter, "Индекс IMOEX");
+
+    insertAlignedText(table, 0, 1, Qt::AlignCenter, data.compTicker);
+    insertAlignedText(table, 1, 1, Qt::AlignCenter, data.compISIN);
+    insertAlignedText(table, 2, 1, Qt::AlignCenter, data.compYear);
+    insertAlignedText(table, 3, 1, Qt::AlignCenter, data.compCountry);
+    insertAlignedText(table, 4, 1, Qt::AlignCenter, data.compAddr);
+    insertAlignedText(table, 5, 1, Qt::AlignCenter, data.compIndustry);
+    insertAlignedText(table, 6, 1, Qt::AlignCenter, data.compProperty);
+    insertAlignedText(table, 7, 1, Qt::AlignCenter, data.compDivPol);
+    insertAlignedText(table, 8, 1, Qt::AlignCenter, data.compPref);
+    insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
+
+    table->setFormat(tableFormat);
+    name->update();
+    return name;
 }
 
 void CompanyPreviewArea::infoDataChange(CompanyPreviewAreaInfo *data) {
