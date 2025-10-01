@@ -136,18 +136,9 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
 }
 
 QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data) {
-    int row = 10;
-    int col = 2;
-    name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+
     QTextCursor cursor(name->textCursor());
-    QTextTable *table = cursor.insertTable(row, col);
-    QTextTableFormat tableFormat = table->format();
-    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-    tableFormat.setAlignment(Qt::AlignCenter);
-    tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
-    tableFormat.setBorderBrush(Qt::lightGray);
-    tableFormat.setCellPadding(0);
-    tableFormat.setCellSpacing(0);
+    QTextTable *table = cursor.insertTable(10, 2);
 
     // Colomn Param
     insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");
@@ -172,7 +163,6 @@ QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPrevi
     insertAlignedText(table, 8, 1, Qt::AlignCenter, data.compPref);
     insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
 
-    table->setFormat(tableFormat);
     name->update();
     return name;
 }
@@ -182,6 +172,7 @@ void CompanyPreviewArea::infoDataChange(CompanyPreviewAreaInfo *data) {
 
     nameCompany = newNameLabel(nameCompany, data->nameCompany);
     icoCompany = newIcoLabel(icoCompany, data->logoPATH);
+    tableInfoCompany = newTableLabel(tableInfoCompany, *data);
 
     //emit infoDataChanged(data);
     repaint();

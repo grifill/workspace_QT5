@@ -190,10 +190,9 @@ void MainWindow::reprint(const QString &company) {
     QPair<QString, CompanyPreviewAreaInfo> pair;
     foreach (pair, companiesView) {
         if (company == pair.first) {
-
             // Change Data
-            previewComArea->infoDataChange(&CompanyPreviewData);
-            qDebug() << company;
+            previewComArea->infoDataChange(&pair.second);
+            //qDebug() << company;
         }
     }
 
