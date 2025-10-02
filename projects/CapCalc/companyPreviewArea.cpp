@@ -93,12 +93,11 @@ QLabel *CompanyPreviewArea::newIcoLabel(QLabel *ico, const QString &text) {
 }
 
 QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &data) {
-    int row = 10;
-    int col = 2;
-    tableInfoCompany = new QTextEdit;
-    tableInfoCompany->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-    QTextCursor cursor(tableInfoCompany->textCursor());
-    QTextTable *table = cursor.insertTable(row, col);
+
+    QTextEdit *tableInfo = new QTextEdit;
+    tableInfo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+    QTextCursor cursor(tableInfo->textCursor());
+    QTextTable *table = cursor.insertTable(10, 2);
     QTextTableFormat tableFormat = table->format();
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     tableFormat.setAlignment(Qt::AlignCenter);
@@ -131,8 +130,8 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
     insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
 
     table->setFormat(tableFormat);
-    tableInfoCompany->update();
-    return tableInfoCompany;
+    tableInfo->update();
+    return tableInfo;
 }
 
 QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data) {
