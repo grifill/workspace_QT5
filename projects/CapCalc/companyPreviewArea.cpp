@@ -97,8 +97,9 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
     QTextEdit *tableInfo = new QTextEdit;
     tableInfo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     QTextCursor cursor(tableInfo->textCursor());
-    QTextTable *table = cursor.insertTable(10, 2);
-    QTextTableFormat tableFormat = table->format();
+    table = cursor.insertTable(10, 2);
+
+    QTextTableFormat tableFormat;
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     tableFormat.setAlignment(Qt::AlignCenter);
     tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
@@ -135,9 +136,6 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
 }
 
 QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data) {
-
-    QTextCursor cursor(name->textCursor());
-    QTextTable *table = cursor.insertTable(10, 2);
 
     // Colomn Param
     insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");

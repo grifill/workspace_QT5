@@ -73,9 +73,15 @@ private:
     QLabel *newIcoLabel(QLabel *ico, const QString &text);
     QTextEdit *newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data);
 
+    // Name
     QLabel *nameCompany;
+
+    // Ico
     QLabel *icoCompany;
+
+    // Table
     QTextEdit *tableInfoCompany;
+    QTextTable *table;
 
     QGridLayout *companyPreviewAreaLayout;
 };
