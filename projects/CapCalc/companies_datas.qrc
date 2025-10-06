@@ -3,5 +3,7 @@
         <file>companies/ini/BANE.ini</file>
         <file>companies/ini/ROSN.ini</file>
         <file>companies/ini/SBER.ini</file>
+        <file>companies/ini/LKOH.ini</file>
+        <file>companies/ini/SIBN.ini</file>
     </qresource>
 </RCC>
