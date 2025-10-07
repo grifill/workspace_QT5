@@ -64,6 +64,7 @@ signals:
 
 private:
     void insertAlignedText(QTextTable *table, int row, int col, Qt::Alignment alignment, QString text);
+    void deleteTextTable(QTextTable *table);
 
     QLabel *createNameLabel(const QString &text);
     QLabel *createIcoLabel(const QString &text);

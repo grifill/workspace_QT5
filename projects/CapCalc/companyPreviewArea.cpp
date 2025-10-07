@@ -61,6 +61,16 @@ void CompanyPreviewArea::insertAlignedText(QTextTable *table, int row, int col, 
     textCursor.insertText(text);
 }
 
+void CompanyPreviewArea::deleteTextTable(QTextTable *table) {
+
+    // Delete old data
+    QTextCursor cursorDel = table->firstCursorPosition();
+    cursorDel.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+    cursorDel.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+    //cursorDel.deleteChar();
+    cursorDel.removeSelectedText();
+}
+
 QLabel *CompanyPreviewArea::createNameLabel(const QString &text) {
     QLabel *label = new QLabel(tr("<b>%1</b>").arg(text));
     label->setAlignment(Qt::AlignmentFlag::AlignHCenter);
@@ -137,6 +147,18 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
 
 QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data) {
 
+    // Clear old data
+    deleteTextTable(table);
+    table = name->textCursor().insertTable(10, 2);
+
+    QTextTableFormat tableFormat;
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    tableFormat.setAlignment(Qt::AlignCenter);
+    tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
+    tableFormat.setBorderBrush(Qt::lightGray);
+    tableFormat.setCellPadding(0);
+    tableFormat.setCellSpacing(0);
+
     // Colomn Param
     insertAlignedText(table, 0, 0, Qt::AlignCenter, "Торговый код");
     insertAlignedText(table, 1, 0, Qt::AlignCenter, "ISIN");
@@ -160,7 +182,9 @@ QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPrevi
     insertAlignedText(table, 8, 1, Qt::AlignCenter, data.compPref);
     insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
 
+    table->setFormat(tableFormat);
     name->update();
+
     return name;
 }
 
