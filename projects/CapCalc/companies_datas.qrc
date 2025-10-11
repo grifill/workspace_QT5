@@ -5,5 +5,7 @@
         <file>companies/ini/SBER.ini</file>
         <file>companies/ini/LKOH.ini</file>
         <file>companies/ini/SIBN.ini</file>
+        <file>companies/ini/HEAD.ini</file>
+        <file>companies/ini/NMTP.ini</file>
     </qresource>
 </RCC>
