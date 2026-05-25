@@ -7,5 +7,6 @@
         <file>companies/ini/SIBN.ini</file>
         <file>companies/ini/HEAD.ini</file>
         <file>companies/ini/NMTP.ini</file>
+        <file>companies/ini/MSRS.ini</file>
     </qresource>
 </RCC>
