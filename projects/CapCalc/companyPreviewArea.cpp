@@ -141,16 +141,13 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
     insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
     table->setFormat(tableFormat);
 
-
-    int lineCount = table->document()->documentLayout()->documentSize().height();
-
+    //qDebug() << "Total line count in cell:" << table->document()->lineCount();
+    int lineCount = table->document()->lineCount();
 
     tableInfo->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    tableInfo->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    tableInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //tableInfo->setMinimumHeight(table->document()->lineCount() * 20);
-    tableInfo->setMinimumHeight(lineCount);
-
+    //tableInfo->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //tableInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //tableInfo->setMinimumHeight(tableFormat.height().value());
 
     tableInfo->update();
     return tableInfo;
