@@ -102,6 +102,43 @@ QLabel *CompanyPreviewArea::newIcoLabel(QLabel *ico, const QString &text) {
     return ico;
 }
 
+double getRowHeight(QTextTable *table, int rowIndex) {
+    if (!table) return 0.0;
+
+    double maxRowHeight = 0.0;
+    QTextDocument *doc = table->document();
+    QAbstractTextDocumentLayout *layout = doc->documentLayout();
+
+    // Iterate through all columns (cells) in the specific row
+    for (int col = 0; col < table->columns(); ++col) {
+        QTextTableCell cell = table->cellAt(rowIndex, col);
+        if (!cell.isValid()) continue;
+
+        QTextBlock block = cell.firstCursorPosition().block();
+        QTextBlock endBlock = cell.lastCursorPosition().block();
+
+        double cellContentHeight = 0.0;
+
+        // Sum up the heights of all text blocks inside this cell
+        while (block.isValid()) {
+            cellContentHeight += layout->blockBoundingRect(block).height();
+            if (block == endBlock) break;
+            block = block.next();
+        }
+
+        // Keep track of the tallest cell in the row
+        if (cellContentHeight > maxRowHeight) {
+            maxRowHeight = cellContentHeight;
+        }
+    }
+
+    // Add table format paddings and borders
+    QTextTableFormat format = table->format();
+    maxRowHeight += format.cellPadding() * 2.0;
+
+    return maxRowHeight;
+}
+
 QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &data) {
 
     QTextEdit *tableInfo = new QTextEdit;
@@ -143,11 +180,20 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
 
     //qDebug() << "Total line count in cell:" << table->document()->lineCount();
     int lineCount = table->document()->lineCount();
+    double aa = getRowHeight(table, 0);
+    qDebug() << "Total line count in cell:" << lineCount;
+    qDebug() << "getRowHeight:" << aa;
+
 
     tableInfo->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     //tableInfo->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     //tableInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //tableInfo->setMinimumHeight(tableFormat.height().value());
+    tableInfo->setMinimumHeight(lineCount * 15);
+    tableInfo->setMinimumWidth(400);
+
+
+
+
 
     tableInfo->update();
     return tableInfo;

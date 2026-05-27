@@ -108,7 +108,7 @@ MainWindow::MainWindow() {
     choiseLayout->addWidget(choiseCompany);
 
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
-    previewGroupBox->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    previewGroupBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
     previewComArea = new CompanyPreviewArea(previewGroupBox, &CompanyPreviewData);
