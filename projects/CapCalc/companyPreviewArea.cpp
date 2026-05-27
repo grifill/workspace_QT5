@@ -105,12 +105,12 @@ QLabel *CompanyPreviewArea::newIcoLabel(QLabel *ico, const QString &text) {
 QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &data) {
 
     QTextEdit *tableInfo = new QTextEdit;
-    tableInfo->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     QTextCursor cursor(tableInfo->textCursor());
     table = cursor.insertTable(10, 2);
 
     QTextTableFormat tableFormat;
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    tableFormat.setHeight(QTextLength(QTextLength::PercentageLength, 100));
     tableFormat.setAlignment(Qt::AlignCenter);
     tableFormat.setBorderStyle(QTextTableFormat::BorderStyle_Solid);
     tableFormat.setBorderBrush(Qt::lightGray);
@@ -139,11 +139,23 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
     insertAlignedText(table, 7, 1, Qt::AlignCenter, data.compDivPol);
     insertAlignedText(table, 8, 1, Qt::AlignCenter, data.compPref);
     insertAlignedText(table, 9, 1, Qt::AlignCenter, data.compIMOEX);
-
     table->setFormat(tableFormat);
+
+
+    int lineCount = table->document()->documentLayout()->documentSize().height();
+
+
+    tableInfo->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    tableInfo->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    tableInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //tableInfo->setMinimumHeight(table->document()->lineCount() * 20);
+    tableInfo->setMinimumHeight(lineCount);
+
+
     tableInfo->update();
     return tableInfo;
 }
+
 
 QTextEdit *CompanyPreviewArea::newTableLabel(QTextEdit *name, const CompanyPreviewAreaInfo &data) {
 

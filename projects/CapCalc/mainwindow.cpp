@@ -108,10 +108,16 @@ MainWindow::MainWindow() {
     choiseLayout->addWidget(choiseCompany);
 
     QGroupBox *previewGroupBox = new QGroupBox(tr("Company Preview"));
-    previewComArea = new CompanyPreviewArea(previewGroupBox, &CompanyPreviewData);
+    previewGroupBox->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
     QVBoxLayout *previewLayout = new QVBoxLayout(previewGroupBox);
-    previewGroupBox->setMinimumSize(350,620);
+    previewComArea = new CompanyPreviewArea(previewGroupBox, &CompanyPreviewData);
+
+    //previewComArea->setLayout(previewLayout);
     previewLayout->addWidget(previewComArea);
+    previewLayout ->setAlignment(previewComArea, Qt::AlignHCenter);
+
+
 
     // ==============================================
     mainTable = new CompanyTableArea;
