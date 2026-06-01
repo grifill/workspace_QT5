@@ -142,6 +142,10 @@ double getRowHeight(QTextTable *table, int rowIndex) {
 QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &data) {
 
     QTextEdit *tableInfo = new QTextEdit;
+    tableInfo->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    //tableInfo->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //tableInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     QTextCursor cursor(tableInfo->textCursor());
     table = cursor.insertTable(10, 2);
 
@@ -180,18 +184,12 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
 
     //qDebug() << "Total line count in cell:" << table->document()->lineCount();
     int lineCount = table->document()->lineCount();
-    double aa = getRowHeight(table, 0);
+    int contentHeight = table->document()->size().height();
     qDebug() << "Total line count in cell:" << lineCount;
-    qDebug() << "getRowHeight:" << aa;
+    qDebug() << "contentHeight:" << contentHeight;
 
-
-    tableInfo->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    //tableInfo->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //tableInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    tableInfo->setMinimumHeight(lineCount * 15);
+    tableInfo->setMinimumHeight(lineCount * contentHeight);
     tableInfo->setMinimumWidth(400);
-
-
 
 
 
