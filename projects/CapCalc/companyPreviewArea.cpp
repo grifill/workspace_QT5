@@ -183,13 +183,14 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
     table->setFormat(tableFormat);
 
     //qDebug() << "Total line count in cell:" << table->document()->lineCount();
-    int lineCount = table->document()->lineCount();
-    int contentHeight = table->document()->size().height();
-    qDebug() << "Total line count in cell:" << lineCount;
-    qDebug() << "contentHeight:" << contentHeight;
+    //int lineCount = table->document()->lineCount();
+    //int contentHeight = table->document()->size().height();
+    //qDebug() << "Total line count in cell:" << lineCount;
+    //qDebug() << "contentHeight:" << contentHeight;
 
-    tableInfo->setMinimumHeight(lineCount * contentHeight);
+    //tableInfo->setMinimumHeight(lineCount * contentHeight);
     tableInfo->setMinimumWidth(400);
+    tableInfo->setMinimumHeight(400);
 
 
 

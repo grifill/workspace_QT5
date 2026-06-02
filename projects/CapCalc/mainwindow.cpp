@@ -153,7 +153,7 @@ MainWindow::MainWindow() {
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
 
-    QTextCodec *codec = QTextCodec::codecForName("utf-8");
+    /*QTextCodec *codec = QTextCodec::codecForName("utf-8");
     QSettings settings(":/companies_datas/companies/BANE.ini", QSettings::IniFormat);
     settings.setIniCodec(codec);
     QHash<QString,QString>values;
@@ -170,7 +170,7 @@ MainWindow::MainWindow() {
         values.insert(childKey, settings.value(childKey).toString());
     settings.endGroup();
 
-    qDebug() << values.value("addr").toStdString().c_str();
+    qDebug() << values.value("addr").toStdString().c_str();*/
 }
 
 void MainWindow::createActions() {
