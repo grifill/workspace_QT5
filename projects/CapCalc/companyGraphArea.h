@@ -21,17 +21,18 @@
 #ifndef COMPANYGRAPHAREA_H
 #define COMPANYGRAPHAREA_H
 
-#include <QIcon>
+
 #include <QWidget>
 #include <QStringList>
 #include <QVector>
-#include <QTextTable>
-#include <QTextEdit>
-#include <QGridLayout>
+#include <QString>
 
-QT_BEGIN_NAMESPACE
-class QLabel;
-QT_END_NAMESPACE
+#include <QChartView>
+#include <QList>
+#include <QBarSet>
+#include <QFile>
+#include <QtCharts>
+
 
 struct CompanyGraphAreaInfo
 {
@@ -45,6 +46,9 @@ class CompanyGraphArea : public QWidget
 
 public:
     explicit CompanyGraphArea(QWidget *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
+
+private:
+    QChartView *createGraphLabel(const CompanyGraphAreaInfo &data);
 };
 
 #endif // COMPANYGRAPHAREA_H

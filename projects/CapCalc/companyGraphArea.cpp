@@ -27,3 +27,12 @@ CompanyGraphArea::CompanyGraphArea(QWidget *parent, CompanyGraphAreaInfo *data)
 
 }
 
+QChartView *CompanyGraphArea::createGraphLabel(const CompanyGraphAreaInfo &data) {
+
+
+    //QChartView *chartView = new QChartView(chart);
+
+
+    //tableInfo->update();
+    //return tableInfo;
+}
