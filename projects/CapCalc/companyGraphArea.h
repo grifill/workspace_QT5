@@ -37,7 +37,8 @@
 struct CompanyGraphAreaInfo
 {
     // Description
-    uint32_t data;
+    uint32_t datas;
+    uint32_t dates;
 };
 
 class CompanyGraphArea : public QWidget
@@ -48,7 +49,10 @@ public:
     explicit CompanyGraphArea(QWidget *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
 
 private:
-    QChartView *createGraphLabel(const CompanyGraphAreaInfo &data);
+    QChartView *createGraphLabel();
+
+    // Graph
+    QChartView *graphCompany;
 };
 
 #endif // COMPANYGRAPHAREA_H
