@@ -19,7 +19,6 @@
  * ---------------------------------------------------------------------------
  */
 #include "mainwindow.h"
-#include "companyPreviewArea.h"
 
 MainWindow::~MainWindow()
 {
@@ -135,6 +134,9 @@ MainWindow::MainWindow() {
     //tableView->setStyleSheet(s);
     mainTable->setParent(tableView);
 
+    // Gpaph ===============================================
+    graph = new CompanyGraphArea();
+
     // 4. Signals & slots =======================================
     connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
     //connect(previewComArea, SIGNAL(infoDataChanged(&CompanyPreviewData)), this, SLOT(infoDataChange()));
@@ -148,6 +150,7 @@ MainWindow::MainWindow() {
 
     mainLayout->addWidget(previewGroupBox, 1, 0, Qt::AlignHCenter | Qt::AlignTop);
     mainLayout->addWidget(tableView, 1, 1);
+    mainLayout->addWidget(graph, 2, 2);
 
     mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);

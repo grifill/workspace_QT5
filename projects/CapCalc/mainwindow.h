@@ -45,6 +45,8 @@
 
 #include "companyTableArea.h"
 #include "companyPreviewArea.h"
+#include "companyGraphArea.h"
+
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -68,6 +70,7 @@ public:
     ~MainWindow();
     void show();
 
+    CompanyGraphArea *graph;
     CompanyTableArea *mainTable;
     CompanyPreviewArea *previewComArea;
     CompanyPreviewAreaInfo CompanyPreviewData;
