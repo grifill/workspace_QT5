@@ -137,6 +137,27 @@ MainWindow::MainWindow() {
     // Gpaph ===============================================
     graph = new CompanyGraphArea();
 
+    QChart *chart = new QChart;
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    // Axis X -----------------------------------------
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    chart->addAxis(axisX, Qt::AlignBottom);
+
+    // Axis Y -----------------------------------------
+    QValueAxis *axisY = new QValueAxis();
+    chart->addAxis(axisY, Qt::AlignLeft);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setMinimumSize(640, 480);
+
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    //graph->setParent(chartView);
+
+
     // 4. Signals & slots =======================================
     connect(choiseCompany, &QComboBox::currentTextChanged, this, &MainWindow::reprint);
     //connect(previewComArea, SIGNAL(infoDataChanged(&CompanyPreviewData)), this, SLOT(infoDataChange()));
@@ -147,12 +168,11 @@ MainWindow::MainWindow() {
     mainLayout = new QGridLayout(centralWidget);
 
     mainLayout->addLayout(choiseLayout, 0, 0, Qt::AlignLeft | Qt::AlignTop);
-
     mainLayout->addWidget(previewGroupBox, 1, 0, Qt::AlignHCenter | Qt::AlignTop);
     mainLayout->addWidget(tableView, 1, 1);
-    mainLayout->addWidget(graph, 2, 2);
+    mainLayout->addWidget(chartView, 2, 0, 2, 0);
 
-    mainLayout->setColumnStretch(0, 0);
+    //mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
 
