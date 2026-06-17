@@ -42,5 +42,9 @@
         <file>companies/ico/PHOS_512x512.png</file>
         <file>companies/ico/VSMO_512x512.png</file>
         <file>companies/ico/AFLT_512x512.png</file>
+        <file>companies/ico/AFMC_512x512.png</file>
+        <file>companies/ico/DGBZ_512x512.png</file>
+        <file>companies/ico/EELT_512x512.png</file>
+        <file>companies/ico/NKNC_512x512.png</file>
     </qresource>
 </RCC>
