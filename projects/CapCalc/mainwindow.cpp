@@ -127,6 +127,9 @@ MainWindow::MainWindow() {
     tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter | Qt::AlignTop);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter | Qt::AlignTop);
+    tableView->resizeColumnsToContents();
+    tableView->resizeRowsToContents();
+    tableView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     tableView->setStyleSheet("QHeaderView::section { background-color: #FFFFDA; color: darkBlue; }");
     //tableView->verticalHeader()->setStyleSheet("QHeaderView::section { font-weight: bold; }");
@@ -154,6 +157,7 @@ MainWindow::MainWindow() {
 
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    //chartView->setAlignment(Qt::AlignCenter | Qt::AlignTop);
 
     //graph->setParent(chartView);
 
@@ -167,10 +171,10 @@ MainWindow::MainWindow() {
     placeholderWidget = new QWidget;
     mainLayout = new QGridLayout(centralWidget);
 
-    mainLayout->addLayout(choiseLayout, 0, 0, Qt::AlignLeft | Qt::AlignTop);
-    mainLayout->addWidget(previewGroupBox, 1, 0, Qt::AlignHCenter | Qt::AlignTop);
-    mainLayout->addWidget(tableView, 1, 1);
-    mainLayout->addWidget(chartView, 2, 0, 2, 0);
+    mainLayout->addLayout(choiseLayout, 0, 0, 1, 1, Qt::AlignTop);
+    mainLayout->addWidget(previewGroupBox, 1, 0, 1, 1, Qt::AlignHCenter | Qt::AlignTop);
+    mainLayout->addWidget(tableView, 0, 1, 2, 1);
+    mainLayout->addWidget(chartView, 2, 0, 2, 2);
 
     //mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
