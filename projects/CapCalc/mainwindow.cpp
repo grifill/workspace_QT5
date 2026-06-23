@@ -153,7 +153,7 @@ MainWindow::MainWindow() {
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->setMinimumSize(640, 480);
+    chartView->setMinimumSize(600, 400);
 
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
