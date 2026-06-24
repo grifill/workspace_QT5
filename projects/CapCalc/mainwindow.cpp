@@ -176,6 +176,10 @@ MainWindow::MainWindow() {
     mainLayout->addWidget(tableView, 0, 1, 2, 1);
     mainLayout->addWidget(chartView, 2, 0, 2, 2);
 
+    //mainLayout->setRowStretch(0, 1);
+    mainLayout->setRowStretch(1, 2);
+    mainLayout->setRowStretch(2, 4);
+
     //mainLayout->setColumnStretch(0, 0);
     placeholderWidget->setLayout(mainLayout);
     setCentralWidget(placeholderWidget);
