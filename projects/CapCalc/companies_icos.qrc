@@ -46,5 +46,8 @@
         <file>companies/ico/DGBZ_512x512.png</file>
         <file>companies/ico/EELT_512x512.png</file>
         <file>companies/ico/NKNC_512x512.png</file>
+        <file>companies/ico/RNFT_512x512.png</file>
+        <file>companies/ico/RUAL_512x512.png</file>
+        <file>companies/ico/X5_512x512.png</file>
     </qresource>
 </RCC>
