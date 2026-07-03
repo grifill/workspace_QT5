@@ -190,7 +190,7 @@ QTextEdit *CompanyPreviewArea::createTableLabel(const CompanyPreviewAreaInfo &da
 
     //tableInfo->setMinimumHeight(lineCount * contentHeight);
     tableInfo->setMinimumWidth(400);
-    tableInfo->setMinimumHeight(400);
+    tableInfo->setMinimumHeight(350);
 
 
 

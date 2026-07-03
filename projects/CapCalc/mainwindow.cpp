@@ -122,7 +122,7 @@ MainWindow::MainWindow() {
     mainTable = new CompanyTableArea;
     QTableView *tableView = new QTableView;
     tableView->setModel(mainTable);
-    tableView->setMinimumWidth(800);
+    tableView->setMinimumWidth(600);
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter | Qt::AlignTop);
     tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
