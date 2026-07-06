@@ -41,19 +41,18 @@ struct CompanyGraphAreaInfo
     uint32_t dates;
 };
 
-class CompanyGraphArea : public QWidget
+class CompanyGraphArea : public QChart
 {
     Q_OBJECT
 
 public:
-    explicit CompanyGraphArea(QWidget *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
+    explicit CompanyGraphArea(QGraphicsItem *parent = nullptr);
 
 private:
-    QChartView *createGraphLabel();
+    QChart *createGraphLabel(QChart *chart);
 
     // Graph
-    QChartView *graphCompany;
+    QChart *graphCompany;
 };
 
 #endif // COMPANYGRAPHAREA_H
-

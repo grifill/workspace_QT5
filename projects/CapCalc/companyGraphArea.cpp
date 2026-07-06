@@ -22,33 +22,24 @@
 #include "companyGraphArea.h"
 
 
-CompanyGraphArea::CompanyGraphArea(QWidget *parent, CompanyGraphAreaInfo *data)
-    : QWidget(parent) {
+CompanyGraphArea::CompanyGraphArea(QGraphicsItem *parent)
+    : QChart(parent) {
 
-    graphCompany = createGraphLabel();
-
+    QChart *chart = new QChart(this);
+    graphCompany = createGraphLabel(chart);
 }
 
-QChartView *CompanyGraphArea::createGraphLabel() {
+QChart *CompanyGraphArea::createGraphLabel(QChart *chart) {
 
-    QBarSet *setHigh = new QBarSet("High Tech Sales");
+    QBarSet *setHigh = new QBarSet("Выручка");
     *setHigh << 340 << 410 << 450 << 500;
 
     QStringList dates;
     dates << "Q1" << "Q2" << "Q3" << "Q4";
-    //dates[0] = "2020";
-    //dates[1] = "2021";
-    //dates[2] = "2022";
-    //dates[3] = "2023";
-    //dates[4] = "2024";
-    //dates[5] = "2025";
 
 
     QBarSeries *series = new QBarSeries;
     series->append(setHigh);
-
-
-    QChart *chart = new QChart;
     chart->setAnimationOptions(QChart::AllAnimations);
 
     chart->addSeries(series);
@@ -64,9 +55,7 @@ QChartView *CompanyGraphArea::createGraphLabel() {
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
-    // QChartView Window ------------------------------
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-    chartView->setMinimumSize(320, 240);
-    return chartView;
+    chart->createDefaultAxes();
+
+    return chart;
 }
