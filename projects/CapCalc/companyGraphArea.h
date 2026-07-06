@@ -46,7 +46,7 @@ class CompanyGraphArea : public QChart
     Q_OBJECT
 
 public:
-    explicit CompanyGraphArea(QGraphicsItem *parent = nullptr);
+    explicit CompanyGraphArea(QGraphicsItem *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
 
 private:
     QChart *createGraphLabel(QChart *chart);
@@ -56,3 +56,4 @@ private:
 };
 
 #endif // COMPANYGRAPHAREA_H
+

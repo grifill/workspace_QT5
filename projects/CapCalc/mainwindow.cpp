@@ -141,8 +141,8 @@ MainWindow::MainWindow() {
 
     QChart *graph = new CompanyGraphArea();
 
-    /*
-    QBarSet *setHigh = new QBarSet("Выручка");
+
+    /*QBarSet *setHigh = new QBarSet("Выручка");
     *setHigh << 340 << 410 << 450 << 500;
 
     QStringList dates;
@@ -151,7 +151,7 @@ MainWindow::MainWindow() {
 
     QBarSeries *series = new QBarSeries;
     series->append(setHigh);
-    graph->setAnimationOptions(QChart::AllAnimations);
+    //graph->setAnimationOptions(QChart::AllAnimations);
 
     graph->addSeries(series);
 
@@ -166,12 +166,11 @@ MainWindow::MainWindow() {
     graph->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);*/
 
-
     QChartView *graphView = new QChartView(graph, this);
     graphView->setRenderHint(QPainter::Antialiasing);
     graphView->setMinimumSize(600, 400);
     graphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //graphView->setParent(this);
+    //graph->setParent(graphView);
 
 
     // 4. Signals & slots =======================================
