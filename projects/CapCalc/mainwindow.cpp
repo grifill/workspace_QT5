@@ -138,39 +138,13 @@ MainWindow::MainWindow() {
     mainTable->setParent(tableView);
 
     // Gpaph ===============================================
-
-    QChart *graph = new CompanyGraphArea();
-
-
-    /*QBarSet *setHigh = new QBarSet("Выручка");
-    *setHigh << 340 << 410 << 450 << 500;
-
-    QStringList dates;
-    dates << "Q1" << "Q2" << "Q3" << "Q4";
-
-
-    QBarSeries *series = new QBarSeries;
-    series->append(setHigh);
-    //graph->setAnimationOptions(QChart::AllAnimations);
-
-    graph->addSeries(series);
-
-    // Axis X -----------------------------------------
-    QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(dates);
-    graph->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
-
-    // Axis Y -----------------------------------------
-    QValueAxis *axisY = new QValueAxis();
-    graph->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);*/
-
-    QChartView *graphView = new QChartView(graph, this);
-    graphView->setRenderHint(QPainter::Antialiasing);
-    graphView->setMinimumSize(600, 400);
-    graphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //graph->setParent(graphView);
+    QChart *chart = new QChart();
+    graph = new CompanyGraphArea(chart);
+    graph->setRenderHint(QPainter::Antialiasing);
+    graph->setMinimumSize(600, 400);
+    graph->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QChartView *graphView = new QChartView();
+    graphView->setParent(graph);
 
 
     // 4. Signals & slots =======================================

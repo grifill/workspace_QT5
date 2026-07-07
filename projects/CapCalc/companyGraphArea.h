@@ -27,11 +27,12 @@
 #include <QVector>
 #include <QString>
 
-#include <QChartView>
 #include <QList>
 #include <QBarSet>
 #include <QFile>
+
 #include <QtCharts>
+#include <QChartView>
 
 
 struct CompanyGraphAreaInfo
@@ -41,18 +42,17 @@ struct CompanyGraphAreaInfo
     uint32_t dates;
 };
 
-class CompanyGraphArea : public QChart
+class CompanyGraphArea : public QChartView
 {
     Q_OBJECT
 
 public:
-    explicit CompanyGraphArea(QGraphicsItem *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
+    explicit CompanyGraphArea(QtCharts::QChart *chart = nullptr, QWidget *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
+    //virtual ~CompanyGraphArea();
 
 private:
-    QChart *createGraphLabel(QChart *chart);
-
     // Graph
-    QChart *graphCompany;
+    //QChart *graphCompany;
 };
 
 #endif // COMPANYGRAPHAREA_H
