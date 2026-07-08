@@ -140,11 +140,11 @@ MainWindow::MainWindow() {
     // Gpaph ===============================================
     QChart *chart = new QChart();
     graph = new CompanyGraphArea(chart);
-    graph->setRenderHint(QPainter::Antialiasing);
-    graph->setMinimumSize(600, 400);
-    graph->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     QChartView *graphView = new QChartView();
-    graphView->setParent(graph);
+    graphView->setRenderHint(QPainter::Antialiasing);
+    graphView->setMinimumSize(600, 400);
+    graphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    graphView->setChart(chart);
 
 
     // 4. Signals & slots =======================================

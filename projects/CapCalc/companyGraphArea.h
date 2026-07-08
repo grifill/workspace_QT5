@@ -42,12 +42,12 @@ struct CompanyGraphAreaInfo
     uint32_t dates;
 };
 
-class CompanyGraphArea : public QChartView
+class CompanyGraphArea : public QChart
 {
     Q_OBJECT
 
 public:
-    explicit CompanyGraphArea(QtCharts::QChart *chart = nullptr, QWidget *parent = nullptr, CompanyGraphAreaInfo *data = nullptr);
+    explicit CompanyGraphArea(QtCharts::QChart *chart = nullptr, CompanyGraphAreaInfo *data = nullptr);
     //virtual ~CompanyGraphArea();
 
 private:

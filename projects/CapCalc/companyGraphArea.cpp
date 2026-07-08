@@ -22,8 +22,8 @@
 #include "companyGraphArea.h"
 
 
-CompanyGraphArea::CompanyGraphArea(QtCharts::QChart *chart, QWidget *parent, CompanyGraphAreaInfo *data)
-    : QChartView(parent) {
+CompanyGraphArea::CompanyGraphArea(QChart *chart, CompanyGraphAreaInfo *data)
+    : QChart(chart) {
 
     QBarSet *setHigh = new QBarSet("Выручка");
     *setHigh << 340 << 410 << 450 << 500;
@@ -48,8 +48,6 @@ CompanyGraphArea::CompanyGraphArea(QtCharts::QChart *chart, QWidget *parent, Com
     QValueAxis *axisY = new QValueAxis();
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
-
-    chart->createDefaultAxes();
 }
 
 /*
