@@ -38,8 +38,9 @@
 struct CompanyGraphAreaInfo
 {
     // Description
-    uint32_t datas;
-    uint32_t dates;
+    QString paramName;
+    QStringList years;
+    QVector<uint32_t> paramVal;
 };
 
 class CompanyGraphArea : public QChart

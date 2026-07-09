@@ -142,7 +142,7 @@ MainWindow::MainWindow() {
     graph = new CompanyGraphArea(chart);
     QChartView *graphView = new QChartView();
     graphView->setRenderHint(QPainter::Antialiasing);
-    graphView->setMinimumSize(600, 400);
+    graphView->setMinimumSize(500, 300);
     graphView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     graphView->setChart(chart);
 
