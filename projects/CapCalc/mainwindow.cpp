@@ -138,8 +138,20 @@ MainWindow::MainWindow() {
     mainTable->setParent(tableView);
 
     // Gpaph ===============================================
+    CompanyGraphAreaInfo graphData;
+    graphData.paramName = "Выручка";
+    graphData.years.append("2020");
+    graphData.years.append("2021");
+    graphData.years.append("2022");
+    graphData.years.append("2023");
+    graphData.years.append("2024");
+    graphData.years.append("2025");
+    for (int i = 0; i < 5; ++i) {
+        graphData.paramVals.append(i * 2);
+    }
+
     QChart *chart = new QChart();
-    graph = new CompanyGraphArea(chart);
+    graph = new CompanyGraphArea(chart, &graphData);
     QChartView *graphView = new QChartView();
     graphView->setRenderHint(QPainter::Antialiasing);
     graphView->setMinimumSize(500, 300);

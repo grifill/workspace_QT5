@@ -64,7 +64,7 @@ series->append(set);
 CompanyGraphArea::CompanyGraphArea(QChart *chart, CompanyGraphAreaInfo *data)
     : QChart(chart) {
 
-    QBarSet *setHigh = new QBarSet("Выручка");
+    QBarSet *setHigh = new QBarSet(data->paramName);
     //setHigh->append(data->paramVal.toList());
     //QBarSeries *series = new QBarSeries();
 
@@ -85,7 +85,7 @@ CompanyGraphArea::CompanyGraphArea(QChart *chart, CompanyGraphAreaInfo *data)
 
     // Axis X -----------------------------------------
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    //axisX->append(data->years.value(0));
+    axisX->append(data->years);
     chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
