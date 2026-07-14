@@ -40,7 +40,7 @@ struct CompanyGraphAreaInfo
     // Description
     QString paramName;
     QStringList years;
-    QVector<uint32_t> paramVals;
+    QVector<qreal> paramVals;
 };
 
 class CompanyGraphArea : public QChart

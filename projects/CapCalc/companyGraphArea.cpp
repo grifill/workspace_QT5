@@ -21,64 +21,13 @@
 #include <QtWidgets>
 #include "companyGraphArea.h"
 
-/*
-// ... inside a class
-QVector<double> myChartData = {10.0, 20.0, 15.0};
-QBarSet* barSet = new QBarSet("My Data");
-// You can populate the bar set from your data vector
-for (double value : myChartData) {
-    barSet->append(value);
-}
-
-// Now, let's say you want to change a value
-myChartData[1] = 25.0; // Change the value in your data source
-
-// To update the chart, you need to clear the old data and add the new data.
-// Note: This is a simplified example. For larger datasets,
-// you might want a more efficient update mechanism.
-barSet->remove(0, barSet->count());
-for (double value : myChartData) {
-    barSet->append(value);
-}
-*/
-
-/*
-// 1. Создаем набор данных (BarSet) и серию
-QBarSet *set = new QBarSet("Данные");
-QBarSeries *series = new QBarSeries();
-
-// 2. Создаем или передаем существующий QVector
-QVector<qreal> dataVector = {1.5, 2.3, 4.1, 3.8};
-
-// 3. Добавляем QVector в QBarSet, конвертируя его в QList
-// (требуется для совместимости в версиях Qt 5)
-set->append(dataVector.toList());
-
-// Или для современного синтаксиса в Qt 6 напрямую:
-// set->append(dataVector);
-
-// 4. Добавляем QBarSet в QBarSeries
-series->append(set);
-*/
-
 CompanyGraphArea::CompanyGraphArea(QChart *chart, CompanyGraphAreaInfo *data)
     : QChart(chart) {
 
     QBarSet *setHigh = new QBarSet(data->paramName);
-    //setHigh->append(data->paramVal.toList());
-    //QBarSeries *series = new QBarSeries();
-
     QBarSeries *series = new QBarSeries();
-    QVector<qreal> dataVector = {1.5, 2.3, 4.1, 3.8};
-    setHigh->append(dataVector.toList());
 
-
-    /*
-    for (uint32_t value : qAsConst(data->paramVal)) {
-        setHigh->append(value);
-    }
-    series->append(set);*/
-
+    setHigh->append(data->paramVals.toList());
 
     chart->setAnimationOptions(QChart::AllAnimations);
     chart->addSeries(series);
