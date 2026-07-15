@@ -146,9 +146,12 @@ MainWindow::MainWindow() {
     graphData.years.append("2023");
     graphData.years.append("2024");
     graphData.years.append("2025");
-    for (int i = 0; i < 5; ++i) {
-        graphData.paramVals.append(i * 2);
-    }
+    graphData.paramVals.append(20);
+    graphData.paramVals.append(30);
+    graphData.paramVals.append(100);
+    graphData.paramVals.append(50);
+    graphData.paramVals.append(25);
+    graphData.paramVals.append(10);
 
     QChart *chart = new QChart();
     graph = new CompanyGraphArea(chart, &graphData);
