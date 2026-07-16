@@ -49,7 +49,6 @@ class CompanyGraphArea : public QChart
 
 public:
     explicit CompanyGraphArea(QtCharts::QChart *chart = nullptr, CompanyGraphAreaInfo *data = nullptr);
-    //virtual ~CompanyGraphArea();
 
 private:
     // Graph
