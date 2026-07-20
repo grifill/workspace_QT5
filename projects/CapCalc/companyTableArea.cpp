@@ -134,7 +134,7 @@ bool CompanyTableArea::setData(const QModelIndex &index, const QVariant &value, 
 
 Qt::ItemFlags CompanyTableArea::flags(const QModelIndex &index) const
 {
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+    return QAbstractItemModel::flags(index);
 }
 
 void CompanyTableArea::addMapping(QString color, QRect area)
