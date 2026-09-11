@@ -50,5 +50,7 @@
         <file>companies/ico/RUAL_512x512.png</file>
         <file>companies/ico/X5_512x512.png</file>
         <file>companies/ico/YDEX_512x512.png</file>
+        <file>companies/ico/ASTR_512x512.png</file>
+        <file>companies/ico/NKHP_512x512.png</file>
     </qresource>
 </RCC>
